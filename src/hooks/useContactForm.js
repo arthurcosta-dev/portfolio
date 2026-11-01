@@ -12,6 +12,8 @@ const useContactForm = () => {
   const isSubmitting = useRef(false);
 
   const mutation = useMutation({
+    // Sem conexão, tenta e mostra o erro, em vez de ficar parado em "Enviando…".
+    networkMode: "always",
     // Campo oculto preenchido é robô: finge que enviou e não grava nada.
     mutationFn: (data) => (data.website ? null : sendContactMessage(data)),
     onSuccess: () => setValues(EMPTY_VALUES),

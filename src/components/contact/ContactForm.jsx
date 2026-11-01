@@ -21,17 +21,22 @@ const ContactForm = () => {
     name,
     value: values[name],
     error: errors[name],
+    disabled: isSending,
     onChange: handleChange,
     onBlur: handleBlur,
   });
 
   return (
-    <Card className="rounded-card-md relative z-10 mx-auto mt-10 max-w-[560px] p-6 md:p-9">
+    <Card
+      variant="field"
+      className="relative z-10 mx-auto mt-8 max-w-[560px] rounded-[22px] p-6 md:mt-10 md:rounded-[24px] md:p-9"
+    >
       <form
         aria-label="Formulário de contato"
+        aria-busy={isSending}
         noValidate
         onSubmit={handleSubmit}
-        className="flex flex-col gap-5"
+        className="flex flex-col gap-[18px] md:gap-5"
       >
         <FormField
           id="nome"
@@ -67,13 +72,25 @@ const ContactForm = () => {
           onChange={handleChange}
           className="sr-only"
         />
-        <Button type="submit" disabled={isSending} className="mt-2 h-14">
-          {isSending && <Spinner />}
-          {isSending ? "Enviando..." : "Enviar mensagem"}
-        </Button>
-        <div aria-live="polite" className="text-sm empty:hidden">
-          {wasSent && <p className="text-texto-2">{SITE.contact.sent}</p>}
-          {hasFailed && <p className="text-erro">{SITE.contact.failed}</p>}
+        <div className="mt-1.5 md:mt-2">
+          <Button
+            type="submit"
+            disabled={isSending}
+            aria-busy={isSending}
+            className="h-14 w-full"
+          >
+            {isSending && <Spinner />}
+            {isSending ? "Enviando…" : "Enviar mensagem"}
+          </Button>
+          {/* Sempre montada: o leitor de tela só anuncia mudança em região que já existe. */}
+          <div aria-live="polite" className="text-sm">
+            {wasSent && (
+              <p className="text-texto-2 mt-4">{SITE.contact.sent}</p>
+            )}
+            {hasFailed && (
+              <p className="text-erro mt-4">{SITE.contact.failed}</p>
+            )}
+          </div>
         </div>
       </form>
     </Card>
