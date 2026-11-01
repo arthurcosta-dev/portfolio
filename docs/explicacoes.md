@@ -36,6 +36,8 @@ Cada conceito em linguagem simples, com o exemplo deste projeto.
 
 **Rota protegida:** um componente que confere a sessão antes de desenhar a página e manda para `/login` quem não entrou. Ela melhora a navegação, mas não é a segurança: alguém poderia alterar o JavaScript no próprio navegador. Quem protege as mensagens é o RLS, no banco. Aqui: `src/components/admin/ProtectedRoute.jsx`.
 
+**API REST do Supabase:** toda tabela também responde em um endereço comum, `/rest/v1/<tabela>`, que aceita um `fetch` simples com a chave `anon` no cabeçalho `apikey`. A home usa isso para ler os destaques sem baixar a biblioteca do Supabase, de cerca de 55 kB comprimidos. Aqui: `src/services/featured.js`.
+
 **Upsert:** grava uma linha ou, se a chave já existir, atualiza a que está lá. Ao salvar os destaques, cada projeto escolhido é gravado com a nova posição, sem erro de duplicidade.
 
 ## Formulário

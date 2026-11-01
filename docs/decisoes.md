@@ -40,6 +40,7 @@ Dependências de cada funcionalidade entram na fase em que são usadas, para o h
 ## Exceções às convenções
 
 - **Estado visual em componente:** `useState` de abrir e fechar o menu (`Header`) e de imagem que falhou (`ProjectPreview`) ficam no componente. Não há regra de negócio nem chamada externa, e um hook só para isso esconderia três linhas simples.
+- **Destaques com `fetch` puro na home:** o visitante lê `featured_projects` pela API REST do Supabase, sem a biblioteca, para não baixar cerca de 55 kB comprimidos a cada visita. Em troca, esse trecho tem endereço e cabeçalho escritos à mão. O dashboard continua com a biblioteca. Se a leitura falhar ou passar de 3 segundos, a home mostra os repositórios mais recentes.
 - **Seção que usa hook:** `FeaturedProjects` chama `useFeatured` e desenha o resultado, e nunca fala com o service. Assim a `Home` não precisa repassar props por várias camadas.
 - **Pré-visualização do GitHub (`opengraph.githubassets.com`):** testada no serviço real em 01/11/2026 (resposta 200, PNG de cerca de 120 KB, carregamento visto no navegador). Só aparece em `/projetos/:nome`, com `loading="lazy"` e tamanho reservado, e some se falhar, com teste. O formato é decidido pelo GitHub.
 
