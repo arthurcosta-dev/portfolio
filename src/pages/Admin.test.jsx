@@ -1,9 +1,10 @@
-import { screen, waitFor, within } from "@testing-library/react";
+import { act, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { routes } from "../routes";
 import {
   isInvalidCredentials,
+  isTooManyAttempts,
   onAuthChange,
   signIn,
   signOut,
@@ -55,6 +56,7 @@ describe("login e painel", () => {
     signIn.mockResolvedValue();
     signOut.mockResolvedValue();
     isInvalidCredentials.mockReturnValue(false);
+    isTooManyAttempts.mockReturnValue(false);
     stubRepos([buildRepo({ name: "alfa" }), buildRepo({ name: "beta" })]);
   });
 
@@ -64,7 +66,7 @@ describe("login e painel", () => {
 
   it("sem sessão, /admin redireciona para o login e não busca mensagens", async () => {
     startSession(null);
-    const router = renderRoutes(routes, "/admin");
+    const { router } = renderRoutes(routes, "/admin");
 
     expect(
       await screen.findByRole("heading", { level: 1, name: "Entrar" }),
@@ -75,7 +77,7 @@ describe("login e painel", () => {
 
   it("enquanto confere a sessão, não mostra o painel nem redireciona", async () => {
     onAuthChange.mockReturnValue(new Promise(() => {}));
-    const router = renderRoutes(routes, "/admin");
+    const { router } = renderRoutes(routes, "/admin");
 
     expect(
       await screen.findByRole("status", { name: "Conferindo o login" }),
@@ -94,7 +96,7 @@ describe("login e painel", () => {
 
   it("com sessão, /login vai direto para o painel", async () => {
     startSession({ user: { id: "dono" } });
-    const router = renderRoutes(routes, "/login");
+    const { router } = renderRoutes(routes, "/login");
 
     expect(
       await screen.findByRole("heading", { level: 1, name: "Painel" }),
@@ -112,6 +114,24 @@ describe("login e painel", () => {
     expect(screen.getByText("Digite seu e-mail.")).toBeInTheDocument();
     expect(screen.getByText("Digite sua senha.")).toBeInTheDocument();
     expect(signIn).not.toHaveBeenCalled();
+  });
+
+  it("muitas tentativas de login têm mensagem própria e o erro some ao digitar", async () => {
+    startSession(null);
+    signIn.mockRejectedValue(new Error("limite"));
+    isTooManyAttempts.mockReturnValue(true);
+    const user = userEvent.setup();
+    renderRoutes(routes, "/login");
+
+    await user.type(await screen.findByLabelText("E-mail"), "a@b.co");
+    await user.type(screen.getByLabelText("Senha"), "errada");
+    await user.click(screen.getByRole("button", { name: "Entrar" }));
+
+    const message = await screen.findByText(/Muitas tentativas/);
+    expect(message).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText("Senha"), "x");
+    expect(screen.queryByText(/Muitas tentativas/)).toBeNull();
   });
 
   it("login com senha errada mostra a mensagem certa", async () => {
@@ -134,7 +154,7 @@ describe("login e painel", () => {
     const notify = startSession(null);
     signIn.mockImplementation(async () => notify({ user: { id: "dono" } }));
     const user = userEvent.setup();
-    const router = renderRoutes(routes, "/login");
+    const { router } = renderRoutes(routes, "/login");
 
     await user.type(await screen.findByLabelText("E-mail"), "a@b.co");
     await user.type(screen.getByLabelText("Senha"), "certa");
@@ -144,16 +164,115 @@ describe("login e painel", () => {
     expect(router.state.location.pathname).toBe("/admin");
   });
 
-  it("sair volta para o login", async () => {
+  it("sair volta para o login e tira as mensagens da memória", async () => {
     const notify = startSession({ user: { id: "dono" } });
     signOut.mockImplementation(async () => notify(null));
     const user = userEvent.setup();
-    const router = renderRoutes(routes, "/admin");
+    const { router, queryClient } = renderRoutes(routes, "/admin");
 
-    await user.click(await screen.findByRole("button", { name: "Sair" }));
+    await screen.findByText("Ana Souza");
+    expect(queryClient.getQueryData(["messages"])).toEqual([MESSAGE]);
+
+    await user.click(screen.getByRole("button", { name: "Sair" }));
 
     await screen.findByRole("heading", { level: 1, name: "Entrar" });
     expect(router.state.location.pathname).toBe("/login");
+    expect(queryClient.getQueryData(["messages"])).toBeUndefined();
+  });
+
+  it("sessão encerrada em outra aba também tira as mensagens da memória", async () => {
+    const notify = startSession({ user: { id: "dono" } });
+    const { queryClient } = renderRoutes(routes, "/admin");
+
+    await screen.findByText("Ana Souza");
+    act(() => notify(null));
+
+    await screen.findByRole("heading", { level: 1, name: "Entrar" });
+    expect(queryClient.getQueryData(["messages"])).toBeUndefined();
+  });
+
+  it("se a conferência da sessão falhar, mostra o login e volta a tentar", async () => {
+    const notify = vi.fn();
+    onAuthChange.mockRejectedValueOnce(new Error("rede"));
+    onAuthChange.mockRejectedValueOnce(new Error("rede"));
+    onAuthChange.mockImplementation(async (callback) => {
+      notify.mockImplementation(callback);
+      return () => {};
+    });
+    const { router } = renderRoutes(routes, "/login");
+
+    await screen.findByRole("heading", { level: 1, name: "Entrar" });
+
+    await waitFor(() => expect(notify.getMockImplementation()).toBeDefined(), {
+      timeout: 4000,
+    });
+    act(() => notify({ user: { id: "dono" } }));
+
+    await screen.findByRole("heading", { level: 1, name: "Painel" });
+    expect(router.state.location.pathname).toBe("/admin");
+  }, 8000);
+
+  it("não vira link o e-mail com parâmetros escondidos", async () => {
+    startSession({ user: { id: "dono" } });
+    const unsafe = "a@b.co?bcc=x";
+    fetchMessages.mockResolvedValue([{ ...MESSAGE, email: unsafe }]);
+    renderRoutes(routes, "/admin");
+
+    expect(await screen.findByText(unsafe)).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: unsafe })).toBeNull();
+  });
+
+  it("e-mail normal abre o programa de e-mail", async () => {
+    startSession({ user: { id: "dono" } });
+    renderRoutes(routes, "/admin");
+
+    expect(
+      await screen.findByRole("link", { name: MESSAGE.email }),
+    ).toHaveAttribute("href", `mailto:${MESSAGE.email}`);
+  });
+
+  it("limite do GitHub nos destaques explica a causa", async () => {
+    startSession({ user: { id: "dono" } });
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValue({ ok: false, status: 403, json: async () => ({}) }),
+    );
+    renderRoutes(routes, "/admin");
+
+    expect(
+      await screen.findByText("O GitHub pediu uma pausa"),
+    ).toBeInTheDocument();
+  });
+
+  it("falha só do banco nos destaques refaz só o banco", async () => {
+    startSession({ user: { id: "dono" } });
+    fetchFeaturedNames.mockRejectedValueOnce(new Error("falhou"));
+    const user = userEvent.setup();
+    renderRoutes(routes, "/admin");
+
+    const alert = (
+      await screen.findByText("Os destaques não carregaram")
+    ).closest('[role="alert"]');
+    const gitHubCalls = fetch.mock.calls.length;
+
+    await user.click(
+      within(alert).getByRole("button", { name: "Tentar de novo" }),
+    );
+
+    await screen.findByRole("switch", { name: "Destacar alfa" });
+    expect(fetch.mock.calls.length).toBe(gitHubCalls);
+  });
+
+  it("destaques sem projetos mostram o estado vazio", async () => {
+    startSession({ user: { id: "dono" } });
+    stubRepos([]);
+    renderRoutes(routes, "/admin");
+
+    expect(
+      await screen.findByText("Nenhum projeto público encontrado ainda."),
+    ).toBeInTheDocument();
   });
 
   it("marca a mensagem como respondida", async () => {
