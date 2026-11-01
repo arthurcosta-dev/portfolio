@@ -1,6 +1,7 @@
 import FeaturedSelector from "../components/admin/FeaturedSelector";
 import MessageList from "../components/admin/MessageList";
 import Button from "../components/ui/Button";
+import Spinner from "../components/ui/Spinner";
 import usePageTitle from "../hooks/usePageTitle";
 import useSignOut from "../hooks/useSignOut";
 
@@ -20,9 +21,11 @@ const Admin = () => {
         <Button
           variant="outline"
           disabled={signOut.isPending}
+          aria-busy={signOut.isPending}
           onClick={() => signOut.mutate()}
           className="h-11 px-5 text-[15px]"
         >
+          {signOut.isPending && <Spinner />}
           Sair
         </Button>
       </div>

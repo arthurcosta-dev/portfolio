@@ -4,7 +4,8 @@ const NAME_MAX = 100;
 const EMAIL_MAX = 254;
 const MESSAGE_MIN = 20;
 const MESSAGE_MAX = 2000;
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Sem ? & #: esses caracteres mudariam o sentido do link mailto no dashboard.
+const EMAIL_PATTERN = /^[^\s@?&#]+@[^\s@?&#]+\.[^\s@?&#]+$/;
 
 // Conta como o char_length do banco: um emoji vale 1, não 2.
 const countChars = (text) => [...text].length;

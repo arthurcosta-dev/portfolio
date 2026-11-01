@@ -36,6 +36,7 @@ describe("validators", () => {
       `${"a".repeat(250)}@b.co`,
       "Digite um e-mail válido, como nome@dominio.com.",
     ],
+    ["ana@b.co?bcc=x", "Digite um e-mail válido, como nome@dominio.com."],
     [" ana@dominio.com ", ""],
   ])("e-mail %j", (value, expected) => {
     expect(validateEmail(value)).toBe(expected);
