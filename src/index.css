@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@import "@fontsource/onest/latin-400.css";
+@import "@fontsource/onest/latin-500.css";
+@import "@fontsource/onest/latin-600.css";
+
+@font-face {
+  font-family: "Fraunces Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2")
+    format("woff2-variations");
+}
+
+@theme {
+  /* Só os tokens abaixo existem: bg-red-500 ou outra cor solta não compila. */
+  --color-*: initial;
+
+  --color-fundo: #060919;
+  --color-fundo-contato: #050816;
+  --color-superficie: #141030;
+  --color-superficie-2: #1c1642;
+  --color-linha-hover: #0c1030;
+  --color-borda-card: #1f1946;
+  --color-borda: #2a2350;
+  --color-borda-forte: #3a2f73;
+  --color-borda-hover: #4a3a8f;
+  --color-texto: #ece9fa;
+  --color-texto-2: #d4d0ec;
+  --color-texto-suave: #a39fc4;
+  --color-placeholder: #8a85b0;
+  --color-acento: #7b4ae8;
+  --color-acento-hover: #8a5cf0;
+  --color-acento-vivo: #915eff;
+  --color-acento-claro: #b79bff;
+  --color-sobre-acento: #ffffff;
+  --color-sobre-acento-2: #f0e9ff;
+  --color-botao-claro-texto: #2d1a72;
+  --color-input: #0b0e26;
+  --color-erro: #ff8a9b;
+  --color-desabilitado: #4b3498;
+  --color-estrelas: #cfc6ff;
+
+  --font-serif: "Fraunces Variable", Georgia, serif;
+  --font-sans: "Onest", system-ui, sans-serif;
+
+  --radius-campo: 12px;
+  --radius-botao: 14px;
+  --radius-card-md: 20px;
+  --radius-card-lg: 28px;
+  --radius-card-xl: 32px;
+}
+
+@layer base {
+  body {
+    @apply bg-fundo text-texto font-sans antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-acento-claro outline-2 outline-offset-3;
+  }
+}

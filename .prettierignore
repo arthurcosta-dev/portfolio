@@ -1,0 +1,8 @@
+dist
+coverage
+package-lock.json
+docs/design
+docs/BRIEF.md
+docs/DESIGN.md
+docs/PROMPT-INICIAL.md
+docs/requisitos-CP3.md
