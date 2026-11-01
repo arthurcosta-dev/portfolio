@@ -9,8 +9,7 @@ const LoginForm = () => {
     values,
     errors,
     isSending,
-    hasFailed,
-    hasWrongCredentials,
+    failure,
     handleChange,
     handleBlur,
     handleSubmit,
@@ -62,13 +61,7 @@ const LoginForm = () => {
             {isSending ? "Entrando…" : "Entrar"}
           </Button>
           <div aria-live="polite" className="text-sm">
-            {hasFailed && (
-              <p className="text-erro mt-4">
-                {hasWrongCredentials
-                  ? "E-mail ou senha incorretos."
-                  : "Não foi possível entrar. Confira sua conexão e tente de novo."}
-              </p>
-            )}
+            {failure && <p className="text-erro mt-4">{failure}</p>}
           </div>
         </div>
       </form>

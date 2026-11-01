@@ -30,3 +30,5 @@ export const onAuthChange = async (callback) => {
 
 export const isInvalidCredentials = (error) =>
   error?.code === "invalid_credentials";
+
+export const isTooManyAttempts = (error) => error?.status === 429;

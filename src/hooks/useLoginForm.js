@@ -1,15 +1,29 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { isInvalidCredentials, signIn } from "../services/auth";
+import {
+  isInvalidCredentials,
+  isTooManyAttempts,
+  signIn,
+} from "../services/auth";
 import { validateEmail, validatePassword } from "../utils/validators";
 
 const VALIDATORS = { email: validateEmail, password: validatePassword };
+
+const describeFailure = (error) => {
+  if (!error) return "";
+  if (isInvalidCredentials(error)) return "E-mail ou senha incorretos.";
+  if (isTooManyAttempts(error)) {
+    return "Muitas tentativas seguidas. Aguarde alguns minutos e tente de novo.";
+  }
+  return "Não foi possível entrar. Confira sua conexão e tente de novo.";
+};
 
 const useLoginForm = () => {
   const [values, setValues] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
 
-  const mutation = useMutation({ networkMode: "always", mutationFn: signIn });
+  // gcTime 0: a senha não fica guardada no cache depois do envio.
+  const mutation = useMutation({ mutationFn: signIn, gcTime: 0 });
 
   const validateField = (field, value) =>
     setErrors((current) => ({ ...current, [field]: VALIDATORS[field](value) }));
@@ -18,6 +32,9 @@ const useLoginForm = () => {
     setValues((current) => ({ ...current, [name]: value }));
     if (errors[name]) {
       validateField(name, value);
+    }
+    if (mutation.isError) {
+      mutation.reset();
     }
   };
 
@@ -49,8 +66,7 @@ const useLoginForm = () => {
     values,
     errors,
     isSending: mutation.isPending,
-    hasFailed: mutation.isError,
-    hasWrongCredentials: isInvalidCredentials(mutation.error),
+    failure: describeFailure(mutation.error),
     handleChange,
     handleBlur,
     handleSubmit,
