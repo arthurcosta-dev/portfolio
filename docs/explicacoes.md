@@ -12,6 +12,34 @@ Cada conceito em linguagem simples, com o exemplo deste projeto.
 
 **CLS (salto de layout):** mede o quanto a página "pula" enquanto carrega. O skeleton com o mesmo tamanho do card real evita isso, e o Lighthouse conta essa nota.
 
+## Back-end sem servidor próprio
+
+**Supabase:** serviço que entrega banco de dados Postgres e login prontos, acessados direto do navegador. Evita escrever e manter um servidor. Aqui ele guarda as mensagens do formulário e os projetos em destaque.
+
+**Tabela:** uma planilha com colunas de tipo definido. `messages` tem nome, e-mail, mensagem, `answered` e data. Os `check` recusam dados fora do tamanho no próprio banco, mesmo que alguém pule a validação do site. O SQL está em `supabase/schema.sql`.
+
+**RLS (Row Level Security):** regras dentro do banco que dizem quem faz o quê em cada linha. A chave `anon` é pública, então qualquer pessoa pode usá-la; o que protege os dados é o RLS. Aqui, um visitante consegue inserir uma mensagem, mas não ler nenhuma. Sem RLS, a chave pública abriria a tabela inteira.
+
+**`anon` e `authenticated`:** são os dois papéis que chegam ao banco. Quem não fez login é `anon`; quem fez é `authenticated`. Como o cadastro está desativado e só existe o usuário do dono, `authenticated` significa, na prática, o Arthur.
+
+**`grant` e `policy`:** o `grant` diz o que um papel pode tentar fazer na tabela, e a `policy` decide em quais linhas isso vale. A operação precisa passar pelos dois. Aqui o visitante só recebe `insert` em nome, e-mail e mensagem, e não consegue nem escolher o valor de `answered`.
+
+**`service_role`:** chave do Supabase que ignora o RLS e abre o banco inteiro. Por isso nunca entra neste projeto: como tudo roda no navegador, qualquer visitante conseguiria encontrá-la.
+
+**EmailJS:** envia e-mail a partir do navegador usando um modelo guardado no painel deles. Aqui avisa o Arthur de uma mensagem nova. A chave dele também é pública; o limite vem da cota e da restrição de domínio. Por isso a mensagem é salva primeiro no Supabase: se o e-mail falhar, ela não se perde.
+
+## Formulário
+
+**`useMutation`:** a parte do TanStack Query para ações que alteram dados, como enviar uma mensagem. O `useQuery` busca dados sozinho; o `useMutation` só roda quando mandado e entrega `isPending`, `isSuccess` e `isError`. Aqui: `src/hooks/useContactForm.js`.
+
+**`useRef`:** guarda um valor que sobrevive entre os desenhos, sem provocar um novo desenho. O `useState` só atualiza no desenho seguinte, tarde demais para dois cliques rápidos. A ref muda na hora, e por isso barra o clique duplo.
+
+**Honeypot (campo isca):** um campo escondido das pessoas, mas presente no HTML. Robôs de spam costumam preencher tudo; quando ele vem preenchido, o site finge que enviou e não grava nada. Barra os robôs simples, não um ataque direcionado.
+
+**`import()` dinâmico:** baixa um pacote só na hora em que o código precisa dele. O Supabase pesa cerca de 55 kB comprimido e só é usado ao enviar. Quem apenas olha o site não baixa nada disso. Aqui: `src/services/supabase.js`.
+
+**`aria-live`:** marca uma região cujas mudanças o leitor de tela anuncia sozinho. Ela precisa existir na página antes de o texto aparecer; por isso os erros entram dentro de uma região já montada. Sem ela, quem não enxerga a tela não saberia que o envio deu certo.
+
 ## Qualidade de código
 
 **ESLint:** lê o código sem executar e aponta erros e regras quebradas. Aqui ele também faz cumprir regras nossas: recusa `fetch` dentro de `components/` e `pages/`, e recusa `<Routes>`. Roda com `npm run lint`.

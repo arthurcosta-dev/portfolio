@@ -19,6 +19,8 @@ export const SITE = {
     quick: "Escreva ou chame por onde preferir.",
     invitation:
       "Estou procurando estágio em desenvolvimento web. Mande uma mensagem ou use os links no rodapé.",
+    sent: "Mensagem enviada. Obrigado pelo contato!",
+    failed: "A mensagem não foi enviada. Confira sua conexão e tente de novo.",
   },
 };
 

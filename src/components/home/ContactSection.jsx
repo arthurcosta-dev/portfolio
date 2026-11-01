@@ -1,4 +1,5 @@
 import { SITE } from "../../config/site";
+import ContactForm from "../contact/ContactForm";
 import OrbitObject from "./OrbitObject";
 import StarField from "./StarField";
 
@@ -16,6 +17,7 @@ const ContactSection = () => (
       <p className="text-texto-suave mx-auto mt-3 max-w-[460px] text-center text-base leading-normal lg:mt-4 lg:text-lg">
         {SITE.contact.invitation}
       </p>
+      <ContactForm />
     </div>
   </section>
 );
