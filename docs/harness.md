@@ -2,7 +2,7 @@
 
 O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é, por que foi escolhido, o que foi descartado, que regra ele faz cumprir e um exemplo real. Os exemplos abaixo aconteceram na Fase 0; o Arthur completa com o que observar depois.
 
-**A ideia central:** instrução escrita a IA pode esquecer. Por isso as regras importantes têm uma segunda barreira automática, que não depende de ela lembrar.
+**A ideia central:** instrução escrita a IA pode esquecer. Por isso as regras importantes têm uma segunda barreira automática, que não depende de ela lembrar. Essas barreiras evitam enganos; não são um cofre, e um comando disfarçado de propósito ainda pode passar.
 
 | Regra                             | Instrução           | Barreira automática                                |
 | --------------------------------- | ------------------- | -------------------------------------------------- |
@@ -34,7 +34,7 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
 - **O que é:** `allow` para o fluxo do dia a dia (`npm run`, `git status/diff/log/add/commit/switch/branch/push`, `gh pr`) e `deny` para o perigoso.
 - **Por que:** menos confirmações repetidas no que é seguro, e veto no que é irreversível. Vale para Bash **e** PowerShell, porque o Claude Code usa os dois neste Windows.
 - **Descartado:** liberar tudo (perigoso) ou confirmar tudo (lento, e confirmar vira hábito).
-- **Regra que faz cumprir:** segredos fora do alcance, sem histórico reescrito, sem apagar em massa.
+- **Regra que faz cumprir:** o `.env` real não é lido pela ferramenta `Read`, o histórico do remoto não é reescrito por push forçado e não há `reset --hard` nem apagar em massa. `git commit --amend` continua liberado, porque só altera commits locais.
 - **Exemplos reais:**
   - A regra `.env*` do BRIEF bloquearia também o `.env.example`, por isso o `deny` lista só os arquivos reais.
   - O `git push` sem force foi acrescentado ao `allow`, porque o fluxo de PR precisa dele a todo momento.
@@ -46,7 +46,7 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
   - `PostToolUse` em `Edit|Write` roda `.claude/hooks/format-file.mjs`, que aplica o Prettier.
 - **Por que:** os limites viram código, testado em `rules.test.mjs`. Escritos em Node para funcionar em qualquer sistema, sem depender de `jq`.
 - **Descartado:** só o `deny`, que compara o começo do comando e não enxerga a branch atual; e só Bash, como previa o BRIEF, pois o PowerShell ficaria sem proteção.
-- **Regra que faz cumprir:** sem commit ou push na `main`, sem force, sem `--no-verify`, sem data falsa, sem `reset --hard`, sem apagar em massa, sem ler o `.env` real pelo terminal.
+- **Regra que faz cumprir:** sem commit ou push na `main`, sem force, sem pular os hooks do Git (`--no-verify`, `-n`, `HUSKY=0`, `core.hooksPath`), sem data falsa, sem `reset --hard`, sem apagar em massa e sem ler o `.env` real com os comandos comuns de terminal (`cat`, `grep`, `Get-Content` e parecidos).
 - **Exemplos reais:**
   - `git push --force --dry-run` foi barrado no Bash e no PowerShell antes de executar.
   - `git commit --dry-run` na `main` foi barrado com "você está na main".
@@ -68,6 +68,7 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
 - **O que é:** skill do Claude para decisões visuais.
 - **Por que:** apoio em telas que não existem no mockup, como tema claro, login e dashboard.
 - **Descartado:** usá-la como autoridade, pois o design já foi aprovado. Ela fica subordinada a `docs/DESIGN.md`.
+- **Regra que faz cumprir:** nenhuma sozinha. Quem define o visual é o `DESIGN.md`, e telas novas precisam da aprovação do Arthur por captura.
 - **Exemplo real:** a completar pelo Arthur.
 
 ## Subagente `revisor-requisitos`
@@ -76,10 +77,10 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
 - **Por que:** quem implementa tende a achar que está certo; o revisor olha só o resultado.
 - **Descartado:** revisar tudo na conversa principal, o que mistura contexto.
 - **Regra que faz cumprir:** os 12 requisitos, a regra de ouro e o que não pode ser inventado.
-- **Exemplo real:** ver o primeiro PR, abaixo.
+- **Exemplo real:** na revisão da Fase 0, ele apontou 15 problemas que a própria IA implementadora não tinha visto. Entre eles: `git commit -n` passava pelo hook, o README divergia do `CLAUDE.md` e este documento prometia "sem histórico reescrito" com `--amend` liberado. Os itens foram corrigidos ou registrados antes do PR. Como o subagente foi criado nessa mesma sessão e só carrega na seguinte, essa revisão rodou num agente geral seguindo o arquivo dele.
 
 ## `.mcp.json`: não foi adicionado
 
-- **Por que não:** nenhum conector precisa ser versionado hoje. Supabase em modo leitura só seria útil na Fase 2, e o SQL já fica em `supabase/schema.sql`. Menos acesso externo é menos risco.
+- **Por que não:** nenhum conector precisa ser versionado hoje. Supabase em modo leitura só seria útil na Fase 2, e o SQL ficará versionado em `supabase/schema.sql`. Menos acesso externo é menos risco.
 - **O que existe:** o conector da Vercel está ligado à conta do Arthur no Claude, fora do repositório, e serve para consultar deploys e logs.
 - **Quando mudar:** se a Fase 2 mostrar uma necessidade clara, adiciono com escopo mínimo e sem chave no arquivo, e registro aqui.

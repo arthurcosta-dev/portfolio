@@ -23,7 +23,7 @@ src/
 .claude/          harness de IA (ver docs/harness.md)
 .husky/           verificações antes do commit
 docs/             requisitos, design e documentos do vídeo
-supabase/         SQL das tabelas e permissões
+supabase/         SQL das tabelas e permissões (chega na Fase 2)
 ```
 
 ## Fluxo de dados

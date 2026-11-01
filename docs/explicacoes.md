@@ -32,6 +32,16 @@ Cada conceito em linguagem simples, com o exemplo deste projeto.
 
 **Pull request (PR):** pedido para juntar uma branch à `main`. Mostra as mudanças, roda o CI e, na Vercel, gera um site de pré-visualização antes de publicar de verdade.
 
+**Rewrite do `vercel.json`:** um site de uma página só tem o `index.html` no servidor. Ao abrir `/projetos/rewind` direto, o servidor procuraria esse arquivo e daria erro. O rewrite manda toda rota para o `index.html`, e o React Router desenha a página certa.
+
+**Variáveis `VITE_*`:** configuração lida do `.env`. Tudo que começa com `VITE_` vai parar no JavaScript público, e qualquer visitante consegue ver. Por isso só entram chaves feitas para serem públicas, nunca um segredo.
+
+## Performance
+
+**`@fontsource`:** instala as fontes como pacotes, e elas são servidas pelo próprio site, sem pedir nada ao Google Fonts. Só o subconjunto latino é carregado, o que basta para o português.
+
+**`rollup-plugin-visualizer`:** gera um mapa do que ocupa espaço no JavaScript final. `npm run analyze` cria o `dist/stats.html`, útil para mostrar o carregamento sob demanda no vídeo.
+
 ## Harness de IA
 
 **`CLAUDE.md`:** instruções que o Claude Code lê em toda sessão: objetivo, stack, pastas, nomes, commits e limites. É como o guia que um novo colega leria no primeiro dia.

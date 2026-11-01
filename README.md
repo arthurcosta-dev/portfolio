@@ -12,7 +12,7 @@ As razões de cada escolha estão em [docs/decisoes.md](docs/decisoes.md).
 
 ## Como rodar
 
-Requer Node 22 ou superior.
+Requer Node 24 (ou 22.22.2 em diante, na linha 22).
 
 ```bash
 git clone https://github.com/arthurcosta-dev/portfolio.git
@@ -44,13 +44,16 @@ As mesmas regras estão em [CLAUDE.md](CLAUDE.md), para a IA também segui-las.
 
 ```
 src/
-  config/       dados pessoais e textos fixos
+  main.jsx      entrada (providers + router)
+  routes.jsx    todas as rotas, lazy onde indicado
+  config/       site.js: dados pessoais e textos fixos
   components/   ui/ layout/ home/ projects/ contact/ admin/
   pages/        uma por rota
   hooks/        estado e ciclo de vida
   services/     chamadas externas
   context/      tema e sessão
   utils/        funções puras
+  test/         setup de teste
 ```
 
 **Regra de ouro:** componente só recebe dados e desenha. Chamadas externas ficam em `services/`; estado e ciclo de vida, em `hooks/`. Componente de até ~120 linhas. Rotas só com `createBrowserRouter`, em `src/routes.jsx`. O ESLint verifica parte dessas regras.
@@ -59,7 +62,7 @@ Mais detalhes em [docs/arquitetura.md](docs/arquitetura.md).
 
 ### Nomenclatura
 
-Componentes e seus arquivos em PascalCase. Hooks `useAlgo.js`. Services e utils em camelCase. Pastas em minúsculas. Constantes em `UPPER_SNAKE_CASE`. Testes ao lado do arquivo (`Algo.test.jsx`). Variáveis de ambiente `VITE_*`. Identificadores em inglês; rotas e interface em pt-BR. Classes Tailwind só com tokens do tema.
+Componentes e seus arquivos em PascalCase, em arrow function com `export default`. Hooks `useAlgo.js`. Services e utils em camelCase. Pastas em minúsculas. Constantes em `UPPER_SNAKE_CASE`. Testes ao lado do arquivo (`Algo.test.jsx`). Variáveis de ambiente `VITE_*`. Identificadores em inglês; rotas e interface em pt-BR. Classes Tailwind só com tokens do tema.
 
 ### Commits
 
@@ -74,7 +77,7 @@ Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 
 ### Branches
 
-GitHub Flow. A `main` é protegida e sempre publicável. Cada assunto tem sua branch (`feature/*`, `fix/*`, `docs/*`, `chore/*`, `test/*`, `perf/*`), integrada por pull request com merge commit.
+GitHub Flow. A `main` é protegida e sempre publicável. O trabalho acontece em `feature/*`, `fix/*`, `docs/*`, `chore/*`, `test/*` ou `perf/*`, um assunto por commit, e entra por pull request com merge commit. Antes de cada PR, rode `npm run lint`, `npm run test` e `npm run build`.
 
 ### Verificações automáticas
 

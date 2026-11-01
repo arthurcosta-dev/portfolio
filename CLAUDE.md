@@ -39,7 +39,7 @@ Componentes e seus arquivos em PascalCase, em arrow function com `export default
 ## Commits e branches
 
 - Conventional Commits: tipo em inglês, descrição em português, imperativo, minúsculas, sem ponto final, até 72 caracteres. Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`. Ex.: `feat(admin): lista mensagens recebidas`.
-- GitHub Flow: `main` sempre publicável. Trabalhe em `feature/*`, `fix/*`, `docs/*`, `chore/*`, `test/*` ou `perf/*`, um assunto por commit.
+- GitHub Flow: `main` protegida e sempre publicável. Trabalhe em `feature/*`, `fix/*`, `docs/*`, `chore/*`, `test/*` ou `perf/*`, um assunto por commit.
 - Antes de cada PR: `npm run lint`, `npm run test`, `npm run build` e o subagente `revisor-requisitos`. Integre com merge commit (`gh pr merge --merge --delete-branch`).
 - Telas que não existem no mockup precisam de aprovação do Arthur por captura de tela antes do merge.
 
