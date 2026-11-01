@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router";
-import { QUERY_DEFAULTS } from "../config/queryClient";
+import { QUERY_DEFAULTS } from "../queryClient";
 import ThemeProvider from "../context/ThemeProvider";
 
 export const renderRoutes = (routes, initialEntry = "/") => {

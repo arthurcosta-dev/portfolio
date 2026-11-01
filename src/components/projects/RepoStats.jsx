@@ -1,8 +1,6 @@
 import { formatDate } from "../../utils/formatDate";
+import { pluralize } from "../../utils/pluralize";
 import RepoLanguage from "./RepoLanguage";
-
-const pluralize = (count, singular, plural) =>
-  `${count} ${count === 1 ? singular : plural}`;
 
 const RepoStats = ({ repo }) => (
   <div className="text-texto-suave flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm">

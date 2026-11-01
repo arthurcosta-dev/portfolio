@@ -1,7 +1,7 @@
-import { screen } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { renderWithProviders } from "../test/renderWithProviders";
-import Home from "./Home";
+import { routes } from "../routes";
+import { renderRoutes } from "../test/renderWithProviders";
 
 describe("Home", () => {
   beforeEach(() => {
@@ -17,21 +17,41 @@ describe("Home", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals();
+    document.title = "";
   });
 
-  it("mostra o nome do dono do site", async () => {
-    renderWithProviders(<Home />);
+  it("mostra o nome do dono do site e devolve o título da aba", async () => {
+    document.title = "Projetos | Arthur Costa";
+    renderRoutes(routes);
 
     expect(
       await screen.findByRole("heading", { level: 1, name: /Arthur\s*Costa/ }),
     ).toBeInTheDocument();
+    await waitFor(() => expect(document.title).toBe("Arthur Costa"));
   });
 
-  it("não mostra link enquanto o contato ainda é TODO", async () => {
-    renderWithProviders(<Home />);
+  it("nenhum link aponta para um valor TODO", async () => {
+    renderRoutes(routes);
 
     await screen.findByRole("heading", { level: 1 });
 
-    expect(screen.queryByText("TODO")).not.toBeInTheDocument();
+    screen.getAllByRole("link").forEach((link) => {
+      expect(link.getAttribute("href")).not.toMatch(/TODO/);
+    });
+  });
+
+  it("o menu leva às seções a partir de qualquer página", async () => {
+    renderRoutes(routes, "/projetos");
+
+    const menu = await screen.findByRole("navigation", { name: "Principal" });
+
+    expect(within(menu).getByRole("link", { name: "Sobre" })).toHaveAttribute(
+      "href",
+      "/#sobre",
+    );
+    expect(within(menu).getByRole("link", { name: "Contato" })).toHaveAttribute(
+      "href",
+      "/#contato",
+    );
   });
 });

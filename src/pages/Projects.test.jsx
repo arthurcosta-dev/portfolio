@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { routes } from "../routes";
@@ -96,6 +96,46 @@ describe("páginas de projetos", () => {
     expect(screen.getByRole("img")).toHaveAttribute("loading", "lazy");
   });
 
+  it("na home, mostra skeleton e depois o erro da API", async () => {
+    stubFailure(500);
+    renderRoutes(routes, "/");
+
+    expect(
+      screen.getByRole("status", { name: "Carregando projetos" }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("Os projetos não carregaram"),
+    ).toBeInTheDocument();
+  });
+
+  it("no link do projeto, mostra o erro da API", async () => {
+    stubFailure(500);
+    renderRoutes(routes, "/projetos/rewind-tvtime");
+
+    expect(
+      await screen.findByText("Os projetos não carregaram"),
+    ).toBeInTheDocument();
+  });
+
+  it("mostra o texto padrão para descrição vazia", async () => {
+    stubRepos([buildRepo({ description: "" })]);
+    renderRoutes(routes, "/projetos");
+
+    expect(await screen.findByText("Sem descrição ainda.")).toBeInTheDocument();
+  });
+
+  it("segue sem pré-visualização quando a imagem falha", async () => {
+    stubRepos([buildRepo()]);
+    renderRoutes(routes, "/projetos/rewind-tvtime");
+
+    fireEvent.error(await screen.findByRole("img"));
+
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "rewind-tvtime" }),
+    ).toBeInTheDocument();
+  });
+
   it("avisa quando o projeto do link não existe", async () => {
     stubRepos([buildRepo()]);
     renderRoutes(routes, "/projetos/nao-existe");
@@ -122,6 +162,9 @@ describe("páginas de projetos", () => {
       await screen.findByRole("heading", { name: "repo-0" });
 
       expect(screen.getAllByRole("article")).toHaveLength(large + small);
+      expect(screen.getAllByRole("link", { name: "Ver projeto" })).toHaveLength(
+        large,
+      );
     },
   );
 });
