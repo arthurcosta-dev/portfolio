@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { routes } from "../routes";
@@ -133,6 +133,38 @@ describe("páginas de projetos", () => {
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 1, name: "rewind-tvtime" }),
+    ).toBeInTheDocument();
+  });
+
+  it("na home, o card mostra os dados do repositório", async () => {
+    stubRepos([buildRepo()]);
+    renderRoutes(routes, "/");
+
+    const card = await screen.findByRole("article");
+
+    expect(within(card).getByText("rewind-tvtime")).toBeInTheDocument();
+    expect(
+      within(card).getByText("Guia pessoal de séries."),
+    ).toBeInTheDocument();
+    expect(within(card).getByText("JavaScript")).toBeInTheDocument();
+    expect(within(card).getByText(/20\/10\/2026/)).toBeInTheDocument();
+  });
+
+  it("na home, mostra o estado de lista vazia", async () => {
+    stubRepos([]);
+    renderRoutes(routes, "/");
+
+    expect(
+      await screen.findByText("Nenhum projeto público encontrado ainda."),
+    ).toBeInTheDocument();
+  });
+
+  it("no link do projeto, mostra o skeleton enquanto carrega", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockReturnValue(new Promise(() => {})));
+    renderRoutes(routes, "/projetos/rewind-tvtime");
+
+    expect(
+      await screen.findByRole("status", { name: "Carregando projeto" }),
     ).toBeInTheDocument();
   });
 
