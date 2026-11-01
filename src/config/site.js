@@ -5,3 +5,8 @@ export const SITE = {
   email: "TODO",
   linkedinUrl: "TODO",
 };
+
+export const GITHUB_URL = `https://github.com/${SITE.githubUser}`;
+
+// Link com TODO não aparece na tela.
+export const hasValue = (value) => Boolean(value) && value !== "TODO";
