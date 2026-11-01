@@ -61,7 +61,7 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
 - **Por que:** o mesmo processo em toda funcionalidade, sem reescrever instruções.
 - **Descartado:** um único arquivo de processo, pois as skills carregam só quando a tarefa pede.
 - **Regra que faz cumprir:** GitHub Flow, lint, teste e build antes do PR, reaproveitamento de `ui/`.
-- **Exemplo real:** a `nova-feature` conduziu a Fase 1 na ordem service, hook e componente, com testes de carregamento, erro e vazio junto do código.
+- **Exemplo real:** a `nova-feature` foi usada na Fase 1. Nos projetos do GitHub (PR #4), a ordem foi service, hook e componente, com testes de carregamento, erro e vazio junto do código.
 
 ## Skill `frontend-design`
 
@@ -69,7 +69,7 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
 - **Por que:** apoio em telas que não existem no mockup, como tema claro, login e dashboard.
 - **Descartado:** usá-la como autoridade, pois o design já foi aprovado. Ela fica subordinada a `docs/DESIGN.md`.
 - **Regra que faz cumprir:** nenhuma sozinha. Quem define o visual é o `DESIGN.md`, e telas novas precisam da aprovação do Arthur por captura.
-- **Exemplo real:** na Fase 1, apoiou o tema claro e os estados de carregamento, erro e vazio, dentro das cores do `DESIGN.md`. O merge só aconteceu depois de o Arthur aprovar as capturas, em 01/11/2026.
+- **Exemplo real:** na Fase 1, apoiou o tema claro e os estados de carregamento, erro e vazio, com as cores derivadas conforme o `DESIGN.md`. O merge só aconteceu depois de o Arthur aprovar as capturas, em 01/11/2026.
 
 ## Subagente `revisor-requisitos`
 
@@ -77,7 +77,7 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
 - **Por que:** quem implementa tende a achar que está certo; o revisor olha só o resultado.
 - **Descartado:** revisar tudo na conversa principal, o que mistura contexto.
 - **Regra que faz cumprir:** os 12 requisitos, a regra de ouro e o que não pode ser inventado.
-- **Exemplo real:** na revisão da Fase 0, ele apontou 15 problemas que a própria IA implementadora não tinha visto. Entre eles: `git commit -n` passava pelo hook, o README divergia do `CLAUDE.md` e este documento prometia "sem histórico reescrito" com `--amend` liberado. Os itens foram corrigidos ou registrados antes do PR. Como o subagente foi criado nessa mesma sessão e só carrega na seguinte, essa revisão rodou num agente geral seguindo o arquivo dele. Na Fase 1, já carregado, ele apontou 17 problemas, como página de erro sem menu, skeletons de tamanho diferente do conteúdo real e um commit `docs` que escondia uma dependência nova.
+- **Exemplo real:** na revisão da Fase 0, ele apontou 15 problemas que a própria IA implementadora não tinha visto. Entre eles: `git commit -n` passava pelo hook, o README divergia do `CLAUDE.md` e este documento prometia "sem histórico reescrito" com `--amend` liberado. Os itens foram corrigidos ou registrados antes do PR. Como o subagente foi criado nessa mesma sessão e só carrega na seguinte, essa revisão rodou num agente geral seguindo o arquivo dele. Na Fase 1, já carregado, ele apontou 17 problemas, como página de erro sem menu, skeletons de tamanho diferente do conteúdo real e um commit `docs` que escondia uma dependência nova. O PR #5 foi integrado sem passar por ele, contra a regra; a revisão feita depois encontrou o mesmo defeito de contraste no hover e itens do checklist marcados cedo demais.
 
 ## `.mcp.json`: não foi adicionado
 
