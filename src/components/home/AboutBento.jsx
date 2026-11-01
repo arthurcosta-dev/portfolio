@@ -95,9 +95,7 @@ const AboutBento = () => (
         <h3 className="font-serif text-[28px] leading-[1.2] tracking-[-0.01em] lg:text-[30px]">
           Contato rápido
         </h3>
-        <p className="text-sobre-acento-2 mt-2 text-base">
-          {SITE.contact.quick}
-        </p>
+        <p className="text-sobre-acento mt-2 text-base">{SITE.contact.quick}</p>
         <p className="mt-3 flex flex-wrap gap-x-6 text-[15px]">
           {hasValue(SITE.email) && (
             <TextLink tone="accent" href={`mailto:${SITE.email}`}>
