@@ -10,7 +10,7 @@ import RepoTopics from "./RepoTopics";
 const LargeCard = ({ repo, className }) => (
   <Card
     as="article"
-    className={`rounded-card-lg flex min-h-[320px] flex-col gap-4 p-5 lg:gap-5 lg:p-8 ${className}`}
+    className={`rounded-card-lg hover:border-borda-hover flex min-h-[400px] flex-col gap-4 p-5 lg:min-h-0 lg:gap-5 lg:p-8 ${className}`}
   >
     <h3 className="font-serif text-[34px] leading-[1.2] font-light tracking-[-0.02em] [overflow-wrap:anywhere] lg:text-[40px]">
       <Link to={`/projetos/${repo.name}`} className="hover:text-acento-claro">

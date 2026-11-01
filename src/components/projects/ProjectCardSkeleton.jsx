@@ -3,7 +3,7 @@ import Skeleton from "../ui/Skeleton";
 
 const LargeSkeleton = ({ className }) => (
   <Card
-    className={`rounded-card-lg flex min-h-[320px] flex-col gap-4 p-5 lg:gap-5 lg:p-8 ${className}`}
+    className={`rounded-card-lg flex min-h-[400px] flex-col gap-4 p-5 lg:min-h-0 lg:gap-5 lg:p-8 ${className}`}
   >
     <Skeleton className="h-10 w-3/5 lg:h-12" />
     <Skeleton className="h-16 w-full max-w-[540px]" />
