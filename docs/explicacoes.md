@@ -28,6 +28,16 @@ Cada conceito em linguagem simples, com o exemplo deste projeto.
 
 **EmailJS:** envia e-mail a partir do navegador usando um modelo guardado no painel deles. Aqui avisa o Arthur de uma mensagem nova. A chave dele também é pública; o limite vem da cota e da restrição de domínio. Por isso a mensagem é salva primeiro no Supabase: se o e-mail falhar, ela não se perde.
 
+## Login e dashboard
+
+**Sessão:** depois do login, o Supabase guarda no navegador um comprovante de quem entrou e o envia nas chamadas seguintes. É assim que o RLS reconhece o papel `authenticated`. Aqui, `src/hooks/useAuthSession.js` acompanha a sessão.
+
+**Context API:** entrega um valor a vários componentes sem passá-lo de um em um. O `AuthContext` leva a sessão para o login e para a rota protegida. O provider só envolve `/login` e `/admin`, então quem apenas visita o site não baixa o Supabase por causa dele.
+
+**Rota protegida:** um componente que confere a sessão antes de desenhar a página e manda para `/login` quem não entrou. Ela melhora a navegação, mas não é a segurança: alguém poderia alterar o JavaScript no próprio navegador. Quem protege as mensagens é o RLS, no banco. Aqui: `src/components/admin/ProtectedRoute.jsx`.
+
+**Upsert:** grava uma linha ou, se a chave já existir, atualiza a que está lá. Ao salvar os destaques, cada projeto escolhido é gravado com a nova posição, sem erro de duplicidade.
+
 ## Formulário
 
 **`useMutation`:** a parte do TanStack Query para ações que alteram dados, como enviar uma mensagem. O `useQuery` busca dados sozinho; o `useMutation` só roda quando mandado e entrega `isPending`, `isSuccess` e `isError`. Aqui: `src/hooks/useContactForm.js`.
