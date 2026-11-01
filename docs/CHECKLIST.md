@@ -31,7 +31,7 @@ Item marcado só com evidência: arquivo, teste, URL, print ou nota do Lighthous
 - [ ] **11. Versionamento** (em andamento)
   - [x] Padrão de commit com verificação automática: `commitlint.config.js`, `.husky/commit-msg`; `adicionei a base` foi recusada na Fase 0.
   - [x] Padrões no README e nas instruções da IA: `README.md`, `CLAUDE.md`.
-  - [ ] Cada funcionalidade em branch própria, integrada à principal: PRs #1 a #5 até agora; faltam as fases seguintes.
+  - [ ] Cada funcionalidade em branch própria, integrada à principal: PRs #1 a #8 até agora; faltam as fases seguintes.
 - [ ] **12. Arquitetura** (em andamento)
   - [x] Pastas com responsabilidades claras, descritas: `README.md`, `CLAUDE.md`, `docs/arquitetura.md`.
   - [x] Nomenclatura definida no README e no `CLAUDE.md`.
