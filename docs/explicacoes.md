@@ -2,6 +2,16 @@
 
 Cada conceito em linguagem simples, com o exemplo deste projeto.
 
+## Dados e carregamento
+
+**TanStack Query:** guarda em memória a resposta da API e entrega ao componente `isPending`, `isError` e `data` prontos. Ao navegar entre páginas, reaproveita a resposta em vez de chamar o GitHub de novo. Sem ele, seria preciso repetir `useState` e `useEffect` em cada tela. Aqui: `src/hooks/useRepos.js`.
+
+**Limite de requisições (rate limit):** sem token, o GitHub aceita 60 chamadas por hora por IP. Passando disso, responde 403 ou 429. O `src/services/github.js` reconhece esses códigos, e a tela mostra uma mensagem amigável com "Tentar de novo".
+
+**`React.lazy` + `Suspense`:** `lazy` separa uma página em outro arquivo JavaScript, baixado só quando alguém entra nela. `Suspense` define o que aparece enquanto o arquivo chega. Aqui: `ProjectDetail` em `src/routes.jsx`.
+
+**CLS (salto de layout):** mede o quanto a página "pula" enquanto carrega. O skeleton com o mesmo tamanho do card real evita isso, e o Lighthouse conta essa nota.
+
 ## Qualidade de código
 
 **ESLint:** lê o código sem executar e aponta erros e regras quebradas. Aqui ele também faz cumprir regras nossas: recusa `fetch` dentro de `components/` e `pages/`, e recusa `<Routes>`. Roda com `npm run lint`.

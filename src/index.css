@@ -51,7 +51,83 @@
   --radius-card-xl: 32px;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tema claro: mesma linguagem do escuro, com céu lavanda e o mesmo acento. */
+:root:not(.dark) {
+  color-scheme: light;
+
+  --color-fundo: #f4f1fd;
+  --color-fundo-contato: #ece7fb;
+  --color-superficie: #ffffff;
+  --color-superficie-2: #e9e2fb;
+  --color-linha-hover: #ebe6fa;
+  --color-borda-card: #dfd7f5;
+  --color-borda: #d3c9ef;
+  --color-borda-forte: #b9abe6;
+  --color-borda-hover: #8f79d6;
+  --color-texto: #1a1236;
+  --color-texto-2: #33295c;
+  --color-texto-suave: #575078;
+  --color-placeholder: #6a638c;
+  --color-acento-hover: #6a3ad6;
+  --color-acento-vivo: #7b4ae8;
+  --color-acento-claro: #6a3ad6;
+  --color-input: #ffffff;
+  --color-erro: #b81f45;
+  --color-desabilitado: #9a85dc;
+  --color-estrelas: #7b4ae8;
+}
+
+@keyframes orbit {
+  from {
+    offset-distance: 50%;
+  }
+  to {
+    offset-distance: 150%;
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* A elipse é calculada sobre o elemento pai, então a órbita acompanha qualquer largura. */
+@utility orbit-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-acento-vivo);
+  box-shadow: 0 0 0 6px
+    color-mix(in srgb, var(--color-acento-vivo) 20%, transparent);
+  offset-path: ellipse(50% 50% at 50% 50%);
+  offset-rotate: 0deg;
+  animation: orbit 28s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    offset-distance: 50%;
+  }
+}
+
+@utility float {
+  animation: float 9s ease-in-out infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   body {
     @apply bg-fundo text-texto font-sans antialiased;
   }
