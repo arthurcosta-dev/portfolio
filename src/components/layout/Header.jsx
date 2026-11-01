@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { SITE } from "../../config/site";
 import ThemeToggle from "../ui/ThemeToggle";
 
 const NAV_LINKS = [
@@ -20,9 +21,9 @@ const Header = () => {
       <Link
         to="/"
         onClick={closeMenu}
-        className="font-serif text-[22px] tracking-[-0.01em] md:text-2xl"
+        className="inline-flex min-h-11 items-center font-serif text-[22px] tracking-[-0.01em] md:text-2xl"
       >
-        arthur costa
+        {SITE.name.toLowerCase()}
       </Link>
 
       <nav

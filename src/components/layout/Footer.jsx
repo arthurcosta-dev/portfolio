@@ -1,5 +1,6 @@
 import { Link } from "react-router";
-import { GITHUB_URL, SITE, hasValue } from "../../config/site";
+import { GITHUB_URL, SITE } from "../../config/site";
+import { hasValue } from "../../utils/hasValue";
 
 const LINK_CLASSES = "hover:text-texto inline-flex min-h-11 items-center";
 

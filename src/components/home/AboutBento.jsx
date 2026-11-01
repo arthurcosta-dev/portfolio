@@ -1,8 +1,7 @@
-import { GITHUB_URL, SITE, hasValue } from "../../config/site";
+import { GITHUB_URL, SITE } from "../../config/site";
+import { hasValue } from "../../utils/hasValue";
 import Card from "../ui/Card";
 import TextLink from "../ui/TextLink";
-
-const TECHNOLOGIES = ["React", "JavaScript", "Tailwind CSS", "Vite"];
 
 const AboutBento = () => (
   <section
@@ -16,12 +15,10 @@ const AboutBento = () => (
     <div className="mt-8 grid grid-cols-2 gap-3 lg:mt-12 lg:grid-cols-12 lg:grid-rows-[minmax(224px,auto)_minmax(224px,auto)_minmax(208px,auto)] lg:gap-4">
       <Card className="rounded-card-lg col-span-2 p-7 lg:col-span-7 lg:row-span-2 lg:rounded-card-xl lg:p-11">
         <p className="font-serif text-[27px] leading-[1.22] font-light tracking-[-0.02em] lg:max-w-[600px] lg:text-[clamp(2rem,2.95vw,2.5rem)] lg:leading-[1.18]">
-          Estudo Engenharia de Software e me dedico ao front-end: interface,
-          detalhes e como a página se comporta no celular.
+          {SITE.about.statement}
         </p>
         <p className="text-texto-suave mt-4 text-base leading-normal lg:mt-6 lg:max-w-[520px] lg:text-lg">
-          Procuro um estágio em desenvolvimento web para aprender em time e
-          colocar interfaces no ar.
+          {SITE.about.goal}
         </p>
       </Card>
 
@@ -31,7 +28,7 @@ const AboutBento = () => (
       >
         <h3 className="text-base font-medium lg:text-[17px]">Tecnologias</h3>
         <ul className="mt-3.5 lg:mt-0 lg:grid lg:grid-cols-2 lg:gap-x-6">
-          {TECHNOLOGIES.map((technology) => (
+          {SITE.about.technologies.map((technology) => (
             <li
               key={technology}
               className="border-borda-forte border-t py-[9px] font-serif text-xl font-light lg:py-3 lg:text-2xl"
@@ -66,7 +63,7 @@ const AboutBento = () => (
             </h3>
           </div>
           <p className="text-texto-suave mt-2 text-sm leading-[1.45] lg:mt-4 lg:text-[15px]">
-            Os repositórios públicos reúnem os projetos que construí.
+            {SITE.about.github}
           </p>
         </div>
         <p className="text-[15px]">
@@ -83,10 +80,10 @@ const AboutBento = () => (
         </h3>
         <div>
           <p className="text-texto-2 mt-3 text-[17px] leading-[1.45] lg:mt-0 lg:text-lg">
-            1º ano de Engenharia de Software, com foco em front-end.
+            {SITE.about.education}
           </p>
           <p className="text-texto-suave mt-2 text-[15px] leading-normal lg:mt-2.5 lg:text-base">
-            Objetivo: estágio em desenvolvimento web.
+            {SITE.about.objective}
           </p>
         </div>
       </Card>
@@ -99,14 +96,18 @@ const AboutBento = () => (
           Contato rápido
         </h3>
         <p className="text-sobre-acento-2 mt-2 text-base">
-          Escreva ou chame por onde preferir.
+          {SITE.contact.quick}
         </p>
         <p className="mt-3 flex flex-wrap gap-x-6 text-[15px]">
           {hasValue(SITE.email) && (
-            <TextLink href={`mailto:${SITE.email}`}>{SITE.email}</TextLink>
+            <TextLink tone="accent" href={`mailto:${SITE.email}`}>
+              {SITE.email}
+            </TextLink>
           )}
           {hasValue(SITE.linkedinUrl) && (
-            <TextLink href={SITE.linkedinUrl}>LinkedIn</TextLink>
+            <TextLink tone="accent" href={SITE.linkedinUrl}>
+              LinkedIn
+            </TextLink>
           )}
         </p>
       </Card>
