@@ -1,10 +1,16 @@
 import { getSupabase } from "./supabase";
 
+const FEATURED_TIMEOUT = 3000;
+
 // A home lê os destaques com fetch simples: quem só visita não baixa o Supabase.
+// Com tempo limite: um banco lento não pode segurar os cards da home.
 export const fetchFeaturedNames = async () => {
   const response = await fetch(
     `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/featured_projects?select=repo_name&order=position`,
-    { headers: { apikey: import.meta.env.VITE_SUPABASE_ANON_KEY } },
+    {
+      headers: { apikey: import.meta.env.VITE_SUPABASE_ANON_KEY },
+      signal: AbortSignal.timeout(FEATURED_TIMEOUT),
+    },
   );
 
   if (!response.ok) {

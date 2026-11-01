@@ -18,12 +18,11 @@ const useFeaturedEditor = () => {
   );
 
   const mutation = useMutation({
-    networkMode: "always",
     mutationFn: saveFeaturedNames,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: FEATURED_QUERY_KEY });
-      setDraft(null);
-    },
+    onSuccess: () => setDraft(null),
+    // Também na falha: uma parte pode já ter sido gravada antes do erro.
+    onSettled: () =>
+      queryClient.invalidateQueries({ queryKey: FEATURED_QUERY_KEY }),
   });
 
   const change = (nextSelected) => {
@@ -35,8 +34,11 @@ const useFeaturedEditor = () => {
     repos: orderBySelection(repos.data ?? [], selected),
     selected,
     isPending: repos.isPending || saved.isPending,
-    isError: repos.isError || saved.isError,
-    refetch: () => Promise.all([repos.refetch(), saved.refetch()]),
+    reposError: repos.error,
+    hasFeaturedFailed: saved.isError,
+    // Só refaz o que falhou: chamar o GitHub à toa gasta o limite de 60 por hora.
+    retryRepos: repos.refetch,
+    retryFeatured: saved.refetch,
     toggle: (name) =>
       change(
         selected.includes(name)

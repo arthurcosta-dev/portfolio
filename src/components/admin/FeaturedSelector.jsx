@@ -1,4 +1,5 @@
 import useFeaturedEditor from "../../hooks/useFeaturedEditor";
+import ReposError from "../projects/ReposError";
 import Button from "../ui/Button";
 import EmptyState from "../ui/EmptyState";
 import ErrorState from "../ui/ErrorState";
@@ -11,8 +12,10 @@ const FeaturedSelector = () => {
     repos,
     selected,
     isPending,
-    isError,
-    refetch,
+    reposError,
+    hasFeaturedFailed,
+    retryRepos,
+    retryFeatured,
     toggle,
     move,
     save,
@@ -31,12 +34,15 @@ const FeaturedSelector = () => {
       </div>
     );
   }
-  if (isError) {
+  if (reposError) {
+    return <ReposError error={reposError} onRetry={retryRepos} />;
+  }
+  if (hasFeaturedFailed) {
     return (
       <ErrorState
         title="Os destaques não carregaram"
-        message="O GitHub ou o banco não respondeu. Tente de novo em instantes."
-        onRetry={refetch}
+        message="O banco não respondeu. Tente de novo em instantes."
+        onRetry={retryFeatured}
       />
     );
   }
