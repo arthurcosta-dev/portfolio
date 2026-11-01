@@ -64,7 +64,7 @@ const useContactForm = () => {
     values,
     errors,
     isSending: mutation.isPending,
-    wasSent: mutation.isSuccess,
+    wasSent: mutation.isSuccess && !Object.values(errors).some(Boolean),
     hasFailed: mutation.isError,
     handleChange,
     handleBlur,

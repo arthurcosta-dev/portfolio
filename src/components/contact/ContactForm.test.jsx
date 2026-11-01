@@ -103,6 +103,21 @@ describe("ContactForm", () => {
     expect(screen.getByLabelText("Mensagem")).toHaveValue("");
   });
 
+  it("tira a confirmação quando um novo envio tem erro", async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<ContactForm />);
+
+    await screen.findByLabelText("Nome");
+    await fillValid(user);
+    await user.click(submitButton());
+    await screen.findByText(SITE.contact.sent);
+
+    await user.click(submitButton());
+
+    expect(screen.getByText("Digite seu nome.")).toBeInTheDocument();
+    expect(screen.queryByText(SITE.contact.sent)).not.toBeInTheDocument();
+  });
+
   it("avisa da falha, mantém o texto e deixa tentar de novo", async () => {
     sendContactMessage.mockRejectedValueOnce(new Error("falhou"));
     const user = userEvent.setup();
