@@ -2,8 +2,8 @@
 export const SITE = {
   name: "Arthur Costa",
   githubUser: import.meta.env.VITE_GITHUB_USER ?? "arthurcosta-dev",
-  email: "TODO",
-  linkedinUrl: "TODO",
+  email: "arthurcgcosta@hotmail.com",
+  linkedinUrl: "https://www.linkedin.com/in/arthurcosta-dev",
   headline:
     "Desenvolvedor front-end em formação, procurando estágio em desenvolvimento web.",
   about: {
