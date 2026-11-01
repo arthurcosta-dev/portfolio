@@ -21,15 +21,24 @@ describe("rotas", () => {
       throw new Error("falha de teste");
     };
     const [root] = routes;
+    const [pages] = root.children;
 
     renderRoutes(
-      [{ ...root, children: [{ index: true, element: <Broken /> }] }],
+      [
+        {
+          ...root,
+          children: [
+            { ...pages, children: [{ index: true, element: <Broken /> }] },
+          ],
+        },
+      ],
       "/",
     );
 
     expect(
       await screen.findByRole("heading", { name: "Algo deu errado" }),
     ).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "Principal" })).toBeVisible();
     vi.restoreAllMocks();
   });
 });

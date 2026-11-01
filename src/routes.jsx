@@ -13,10 +13,15 @@ export const routes = [
     element: <Layout />,
     errorElement: <RouteError />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "projetos", element: <Projects /> },
-      { path: "projetos/:nome", element: <ProjectDetail /> },
-      { path: "*", element: <NotFound /> },
+      {
+        errorElement: <RouteError />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: "projetos", element: <Projects /> },
+          { path: "projetos/:nome", element: <ProjectDetail /> },
+          { path: "*", element: <NotFound /> },
+        ],
+      },
     ],
   },
 ];
