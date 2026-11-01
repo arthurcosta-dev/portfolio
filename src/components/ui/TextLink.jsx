@@ -5,7 +5,7 @@ const BASE =
 
 const TONES = {
   default: "hover:text-acento-claro",
-  accent: "hover:text-sobre-acento-2",
+  accent: "hover:decoration-2",
 };
 
 const TextLink = ({
