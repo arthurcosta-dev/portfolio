@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { routes } from "../routes";
@@ -133,6 +133,52 @@ describe("páginas de projetos", () => {
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 1, name: "rewind-tvtime" }),
+    ).toBeInTheDocument();
+  });
+
+  it("na home, o card grande e o pequeno mostram os dados do repositório", async () => {
+    stubRepos([
+      buildRepo(),
+      buildRepo({
+        name: "lume",
+        description: "Loja de móveis.",
+        language: "HTML",
+        updated_at: "2026-09-15T12:00:00Z",
+      }),
+    ]);
+    renderRoutes(routes, "/");
+
+    await screen.findByRole("heading", { name: "rewind-tvtime" });
+    const [large, small] = screen.getAllByRole("article");
+
+    expect(within(large).getByText("rewind-tvtime")).toBeInTheDocument();
+    expect(
+      within(large).getByText("Guia pessoal de séries."),
+    ).toBeInTheDocument();
+    expect(within(large).getByText("JavaScript")).toBeInTheDocument();
+    expect(within(large).getByText(/20\/10\/2026/)).toBeInTheDocument();
+
+    expect(within(small).getByText("lume")).toBeInTheDocument();
+    expect(within(small).getByText("Loja de móveis.")).toBeInTheDocument();
+    expect(within(small).getByText("HTML")).toBeInTheDocument();
+    expect(within(small).getByText(/15\/09\/2026/)).toBeInTheDocument();
+  });
+
+  it("na home, mostra o estado de lista vazia", async () => {
+    stubRepos([]);
+    renderRoutes(routes, "/");
+
+    expect(
+      await screen.findByText("Nenhum projeto público encontrado ainda."),
+    ).toBeInTheDocument();
+  });
+
+  it("no link do projeto, mostra o skeleton enquanto carrega", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockReturnValue(new Promise(() => {})));
+    renderRoutes(routes, "/projetos/rewind-tvtime");
+
+    expect(
+      await screen.findByRole("status", { name: "Carregando projeto" }),
     ).toBeInTheDocument();
   });
 
