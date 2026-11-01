@@ -4,20 +4,29 @@ Item marcado só com evidência: arquivo, teste, URL, print ou nota do Lighthous
 
 ## Requisitos
 
-- [ ] **1. Rotas:** link por projeto, 404, falha de API, refresh em qualquer rota.
-- [ ] **2. Carregamento:** estados de carregamento, erro e vazio; indicador visual; botão bloqueado no envio.
-- [ ] **3. GitHub:** projetos pela API, cards com dados do repositório.
+- [x] **1. Rotas:** `src/routes.jsx`; 404, erro de API e abertura direta em `src/pages/Projects.test.jsx`; refresh em produção: `/projetos` e `/projetos/portfolio` respondem 200.
+- [ ] **2. Carregamento** (em andamento)
+  - [x] Estados de carregamento, erro e vazio com indicador visual: `src/pages/Projects.test.jsx`; telas aprovadas pelo Arthur em 01/11/2026.
+  - [ ] Botão bloqueado no envio.
+- [x] **3. GitHub:** `src/services/github.js`; cards com dados do repositório em `src/pages/Projects.test.jsx`.
 - [ ] **4. Formulário:** validação por campo, e-mail ao dono, mensagem salva, feedback.
 - [ ] **5. Dashboard:** login, redirecionamento, mensagens, marcar como respondida, destaques.
-- [ ] **6. Tema:** claro/escuro persistido entre visitas.
-- [ ] **7. Interface:** responsivo testado, componentes reaproveitados, identidade própria.
-- [ ] **8. Performance:** Lighthouse mobile >= 80, imagens otimizadas, lazy, sem saltos, sem requisição repetida.
+- [x] **6. Tema:** escolha guardada em `src/context/ThemeProvider.test.jsx`; script em `index.html` aplica o tema antes de desenhar a página.
+- [ ] **7. Interface** (em andamento)
+  - [x] Componentes reaproveitados: `src/components/ui/`.
+  - [x] Identidade própria: `docs/DESIGN.md`; telas novas aprovadas pelo Arthur em 01/11/2026.
+  - [ ] Responsivo testado em todas as telas: sem corte horizontal de 360 a 1920 px na Fase 1; faltam as telas da Fase 2 e o teste no celular.
+- [ ] **8. Performance** (em andamento)
+  - [x] Lighthouse mobile >= 80 em produção na Fase 1: 89, 98 e 94 em 01/11/2026; `docs/evidencias/lighthouse-fase-1.png`. Repetir no fim.
+  - [x] Sem saltos: CLS de 0,001 nas 3 medições.
+  - [x] Sem requisição repetida: `src/pages/Projects.test.jsx`.
+  - [ ] Imagens otimizadas em formato e tamanho. Falta uma imagem própria em WebP ou AVIF.
 - [ ] **9. Testes:** validação do formulário e bloqueio do dashboard.
-- [ ] **10. Deploy:** URL pública e publicação automática na `main`.
+- [x] **10. Deploy:** https://portfolio-ten-orcin-b9wg2d3oif.vercel.app/ ; o merge do PR #5 publicou o `robots.txt` sem ação manual.
 - [ ] **11. Versionamento** (em andamento)
   - [x] Padrão de commit com verificação automática: `commitlint.config.js`, `.husky/commit-msg`; `adicionei a base` foi recusada na Fase 0.
   - [x] Padrões no README e nas instruções da IA: `README.md`, `CLAUDE.md`.
-  - [ ] Cada funcionalidade em branch própria, integrada à principal.
+  - [ ] Cada funcionalidade em branch própria, integrada à principal: PRs #1 a #5 até agora; faltam as fases seguintes.
 - [ ] **12. Arquitetura** (em andamento)
   - [x] Pastas com responsabilidades claras, descritas: `README.md`, `CLAUDE.md`, `docs/arquitetura.md`.
   - [x] Nomenclatura definida no README e no `CLAUDE.md`.
