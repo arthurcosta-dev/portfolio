@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Home no celular</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..500&family=Onest:wght@400;500;600&display=swap">
+<style>
+body{margin:0;background:#060919}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p{margin:0}
+.serif{font-family:'Fraunces',Georgia,serif}
+.tl{border-bottom:1px solid currentColor;padding-bottom:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B79BFF;outline-offset:3px}
+.orbit-dot{position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:#915EFF;box-shadow:0 0 0 6px rgba(145,94,255,.2);offset-rotate:0deg;animation:orbit 28s linear infinite}
+@keyframes orbit{
+from{offset-distance:0%}
+to{offset-distance:100%}
+}
+.float{animation:float 9s ease-in-out infinite}
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+100%{transform:translateY(0)}
+}
+.spin{animation:spin .8s linear infinite}
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+@media (prefers-reduced-motion: reduce){
+.orbit-dot{animation:none;offset-distance:18%}
+.float{animation:none}
+.spin{animation:none}
+}
+</style>
+</helmet>
+
+<div style="width:390px;background:#060919;color:#ECE9FA;font-family:'Onest',system-ui,sans-serif;overflow:hidden">
+
+<header style="height:64px;padding:0 12px 0 24px;display:flex;align-items:center;justify-content:space-between">
+<a href="#topo" class="serif" style="font-size:22px;font-weight:400;letter-spacing:-0.01em">arthur costa</a>
+<div style="display:flex;align-items:center;gap:4px">
+<button type="button" aria-label="Alternar tema" style="width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:#ECE9FA;display:inline-flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg>
+</button>
+<button type="button" aria-label="Abrir menu" style="width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:#ECE9FA;display:inline-flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"></path></svg>
+</button>
+</div>
+</header>
+
+<section id="topo" style="position:relative;width:390px;height:700px;overflow:hidden">
+<div aria-hidden="true" style="position:absolute;z-index:1;left:-110px;top:150px;width:620px;height:170px;transform:rotate(-14deg)">
+<svg width="620" height="170" viewBox="0 0 620 170" fill="none" style="position:absolute;left:0;top:0"><ellipse cx="310" cy="85" rx="309" ry="84" stroke="#4A3A8F" stroke-width="1.2"></ellipse></svg>
+<div class="orbit-dot" style="offset-path:path('M 0 85 A 310 85 0 1 1 620 85 A 310 85 0 1 1 0 85')"></div>
+</div>
+<h1 class="serif" style="position:absolute;z-index:2;left:24px;top:36px;font-size:92px;line-height:.88;font-weight:300;letter-spacing:-0.045em;color:#ECE9FA">Arthur<br>Costa</h1>
+<div style="position:absolute;z-index:2;left:24px;right:24px;bottom:40px">
+<p style="display:flex;align-items:center;gap:10px;font-size:14px;color:#A39FC4"><span style="width:8px;height:8px;border-radius:50%;background:#915EFF"></span>Disponível para estágio a partir de [mês/ano]</p>
+<p style="margin-top:16px;font-size:19px;line-height:1.45;color:#D4D0EC">Desenvolvedor front-end em formação, procurando estágio em desenvolvimento web.</p>
+<a href="#projetos" style="margin-top:24px;display:flex;align-items:center;justify-content:center;height:52px;border-radius:14px;background:#7B4AE8;color:#fff;font-size:16px;font-weight:500">Ver projetos</a>
+<a href="#contato" style="margin-top:12px;display:flex;align-items:center;justify-content:center;height:52px;border-radius:14px;border:1px solid #3A2F73;color:#ECE9FA;font-size:16px">Falar comigo</a>
+</div>
+</section>
+
+<section id="projetos" style="padding:72px 24px">
+<h2 class="serif" style="font-size:44px;line-height:1.05;font-weight:300;letter-spacing:-0.03em">Projetos</h2>
+<p style="margin-top:10px;font-size:15px;color:#A39FC4">Lidos direto do GitHub de arthurcosta-dev.</p>
+
+<article style="margin-top:32px;background:#141030;border:1px solid #1F1946;border-radius:24px;padding:20px">
+<div aria-hidden="true" style="height:156px;border-radius:14px;background:#1C1642;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:36px;height:36px;border-radius:7px;background:#3A2F73"></div>
+<div style="flex:1"><div style="width:42%;height:7px;border-radius:4px;background:#A39FC4;opacity:.5"></div><div style="margin-top:10px;height:5px;border-radius:3px;background:#2A2350"><div style="width:72%;height:5px;border-radius:3px;background:#915EFF"></div></div></div>
+</div>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:36px;height:36px;border-radius:7px;background:#4F3A9A"></div>
+<div style="flex:1"><div style="width:56%;height:7px;border-radius:4px;background:#A39FC4;opacity:.5"></div><div style="margin-top:10px;height:5px;border-radius:3px;background:#2A2350"><div style="width:38%;height:5px;border-radius:3px;background:#915EFF"></div></div></div>
+</div>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:36px;height:36px;border-radius:7px;background:#2F2766"></div>
+<div style="flex:1"><div style="width:34%;height:7px;border-radius:4px;background:#A39FC4;opacity:.5"></div><div style="margin-top:10px;height:5px;border-radius:3px;background:#2A2350"><div style="width:100%;height:5px;border-radius:3px;background:#915EFF"></div></div></div>
+</div>
+</div>
+<h3 class="serif" style="margin-top:22px;font-size:34px;line-height:1.2;font-weight:300;letter-spacing:-0.02em">Rewind</h3>
+<p style="margin-top:8px;font-size:16px;line-height:1.5;color:#A39FC4">Organiza as séries que você assiste, com progresso por série e por episódio, nota pessoal e estatísticas.</p>
+<p style="margin-top:18px;display:flex;align-items:center;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:#A39FC4">
+<span style="display:inline-flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#F1E05A"></span>JavaScript</span>
+<span>Atualizado em [dd/mm/aaaa]</span>
+</p>
+<p style="margin-top:18px;display:flex;gap:24px;font-size:15px"><a href="#" class="tl">Ver projeto</a><a href="#" class="tl">Abrir site</a></p>
+</article>
+
+<article style="margin-top:12px;border:1px solid #2A2350;border-radius:18px;padding:22px">
+<h3 class="serif" style="font-size:26px;line-height:1.2;font-weight:300;letter-spacing:-0.01em">[Nome do projeto]</h3>
+<p style="margin-top:8px;font-size:15px;line-height:1.5;color:#A39FC4">[Descrição em uma ou duas linhas.]</p>
+<p style="margin-top:16px;display:flex;align-items:center;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:#A39FC4"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#A39FC4"></span>[linguagem]</span><span>Atualizado em [dd/mm/aaaa]</span></p>
+</article>
+
+<article style="margin-top:12px;border:1px solid #2A2350;border-radius:18px;padding:22px">
+<h3 class="serif" style="font-size:26px;line-height:1.2;font-weight:300;letter-spacing:-0.01em">[Nome do projeto]</h3>
+<p style="margin-top:8px;font-size:15px;line-height:1.5;color:#A39FC4">[Descrição em uma ou duas linhas.]</p>
+<p style="margin-top:16px;display:flex;align-items:center;flex-wrap:wrap;gap:6px 16px;font-size:14px;color:#A39FC4"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#A39FC4"></span>[linguagem]</span><span>Atualizado em [dd/mm/aaaa]</span></p>
+</article>
+
+<div style="margin-top:32px;border-bottom:1px solid #2A2350">
+<a href="#" style="display:block;padding:20px 0;border-top:1px solid #2A2350">
+<span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:17px;font-weight:500">[nome-do-repositório]</span><span style="font-size:13px;color:#A39FC4">[dd/mm/aaaa]</span></span>
+<span style="display:block;margin-top:6px;font-size:15px;line-height:1.45;color:#A39FC4">[Descrição de uma linha.]</span>
+<span style="display:block;margin-top:8px;font-size:13px;color:#A39FC4">[linguagem]</span>
+</a>
+<a href="#" style="display:block;padding:20px 0;border-top:1px solid #2A2350">
+<span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:17px;font-weight:500">[nome-do-repositório]</span><span style="font-size:13px;color:#A39FC4">[dd/mm/aaaa]</span></span>
+<span style="display:block;margin-top:6px;font-size:15px;line-height:1.45;color:#A39FC4">[Descrição de uma linha.]</span>
+<span style="display:block;margin-top:8px;font-size:13px;color:#A39FC4">[linguagem]</span>
+</a>
+<a href="#" style="display:block;padding:20px 0;border-top:1px solid #2A2350">
+<span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:17px;font-weight:500">[nome-do-repositório]</span><span style="font-size:13px;color:#A39FC4">[dd/mm/aaaa]</span></span>
+<span style="display:block;margin-top:6px;font-size:15px;line-height:1.45;color:#A39FC4">[Descrição de uma linha.]</span>
+<span style="display:block;margin-top:8px;font-size:13px;color:#A39FC4">[linguagem]</span>
+</a>
+</div>
+<p style="margin-top:24px;font-size:16px"><a href="#" class="tl">Ver todos os projetos</a></p>
+</section>
+
+<section id="sobre" style="padding:72px 24px">
+<h2 class="serif" style="font-size:44px;line-height:1.05;font-weight:300;letter-spacing:-0.03em">Sobre</h2>
+
+<div style="margin-top:32px;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+
+<div style="grid-column:1 / span 2;background:#141030;border-radius:28px;padding:28px">
+<p class="serif" style="font-size:27px;line-height:1.22;font-weight:300;letter-spacing:-0.02em">Estudo Engenharia de Software e me dedico ao front-end: interface, detalhes e como a página se comporta no celular.</p>
+<p style="margin-top:16px;font-size:16px;line-height:1.5;color:#A39FC4">Procuro um estágio em desenvolvimento web para aprender em time e colocar interfaces no ar.</p>
+<p style="margin-top:20px;font-size:15px"><a href="#" class="tl">Ler a história completa</a></p>
+</div>
+
+<div style="background:#1C1642;border-radius:20px;padding:20px">
+<h3 style="font-size:16px;font-weight:500">Tecnologias</h3>
+<div style="margin-top:14px">
+<p class="serif" style="padding:9px 0;border-top:1px solid #3A2F73;font-size:20px;font-weight:300">React</p>
+<p class="serif" style="padding:9px 0;border-top:1px solid #3A2F73;font-size:20px;font-weight:300">JavaScript</p>
+<p class="serif" style="padding:9px 0;border-top:1px solid #3A2F73;font-size:20px;font-weight:300">Tailwind CSS</p>
+<p class="serif" style="padding:9px 0;border-top:1px solid #3A2F73;font-size:20px;font-weight:300">Vite</p>
+</div>
+</div>
+
+<div style="background:#141030;border-radius:20px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:16px">
+<div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B79BFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2.2"></circle><circle cx="6" cy="19" r="2.2"></circle><circle cx="18" cy="8" r="2.2"></circle><path d="M6 7.2v9.6M18 10.2c0 4-6 3-11 7"></path></svg>
+<h3 style="margin-top:12px;font-size:16px;font-weight:500;overflow-wrap:anywhere">arthurcosta-dev</h3>
+<p style="margin-top:8px;font-size:14px;line-height:1.45;color:#A39FC4">Projetos públicos no GitHub.</p>
+</div>
+<p style="font-size:15px"><a href="#" class="tl">Abrir GitHub</a></p>
+</div>
+
+<div style="grid-column:1 / span 2;border:1px solid #2A2350;border-radius:22px;padding:24px">
+<h3 style="font-size:16px;font-weight:500">FIAP e objetivo</h3>
+<p style="margin-top:12px;font-size:17px;line-height:1.45;color:#D4D0EC">1º ano de Engenharia de Software, com foco em front-end.</p>
+<p style="margin-top:8px;font-size:15px;line-height:1.5;color:#A39FC4">Objetivo: estágio em desenvolvimento web.</p>
+</div>
+
+<div style="grid-column:1 / span 2;background:#7B4AE8;color:#fff;border-radius:26px;padding:26px">
+<h3 class="serif" style="font-size:28px;line-height:1.2;font-weight:400;letter-spacing:-0.01em">Contato rápido</h3>
+<p style="margin-top:8px;font-size:16px;color:#F0E9FF">Escreva ou chame por onde preferir.</p>
+<p style="margin-top:16px;display:flex;flex-wrap:wrap;gap:10px 24px;font-size:15px"><a href="#" class="tl" style="color:#fff">[seu@email.com]</a><a href="#" class="tl" style="color:#fff">[link do LinkedIn]</a></p>
+<a href="#contato" style="margin-top:22px;display:flex;align-items:center;justify-content:center;height:52px;border-radius:14px;background:#fff;color:#2D1A72;font-size:16px;font-weight:500">Enviar mensagem</a>
+</div>
+</div>
+</section>
+
+<section id="contato" style="position:relative;overflow:hidden;background:#050816;padding:72px 24px 72px">
+<svg aria-hidden="true" style="position:absolute;left:0;top:0;width:100%;height:100%;-webkit-mask-image:linear-gradient(to bottom, transparent, #000 140px);mask-image:linear-gradient(to bottom, transparent, #000 140px)">
+<defs>
+<pattern id="st1" width="331" height="283" patternUnits="userSpaceOnUse">
+<circle cx="23" cy="41" r="1.1" fill="#CFC6FF" fill-opacity=".9"></circle>
+<circle cx="87" cy="203" r="0.8" fill="#CFC6FF" fill-opacity=".6"></circle>
+<circle cx="140" cy="77" r="1.4" fill="#CFC6FF" fill-opacity=".95"></circle>
+<circle cx="205" cy="161" r="0.9" fill="#CFC6FF" fill-opacity=".7"></circle>
+<circle cx="262" cy="31" r="1.2" fill="#CFC6FF" fill-opacity=".8"></circle>
+<circle cx="301" cy="239" r="0.8" fill="#CFC6FF" fill-opacity=".5"></circle>
+<circle cx="58" cy="129" r="0.7" fill="#CFC6FF" fill-opacity=".5"></circle>
+<circle cx="181" cy="262" r="1" fill="#CFC6FF" fill-opacity=".75"></circle>
+<circle cx="318" cy="118" r="1.3" fill="#CFC6FF" fill-opacity=".85"></circle>
+<circle cx="112" cy="12" r="0.8" fill="#CFC6FF" fill-opacity=".6"></circle>
+<circle cx="247" cy="198" r="0.7" fill="#CFC6FF" fill-opacity=".45"></circle>
+</pattern>
+<pattern id="st2" width="197" height="241" patternUnits="userSpaceOnUse">
+<circle cx="19" cy="57" r="0.9" fill="#CFC6FF" fill-opacity=".6"></circle>
+<circle cx="121" cy="23" r="1.2" fill="#CFC6FF" fill-opacity=".8"></circle>
+<circle cx="171" cy="139" r="0.8" fill="#CFC6FF" fill-opacity=".55"></circle>
+<circle cx="64" cy="201" r="1.1" fill="#CFC6FF" fill-opacity=".7"></circle>
+<circle cx="143" cy="226" r="0.7" fill="#CFC6FF" fill-opacity=".5"></circle>
+<circle cx="96" cy="112" r="0.8" fill="#CFC6FF" fill-opacity=".5"></circle>
+</pattern>
+</defs>
+<rect width="100%" height="100%" fill="url(#st1)"></rect>
+<rect width="100%" height="100%" fill="url(#st2)"></rect>
+</svg>
+
+<div style="position:relative;z-index:1">
+<div role="img" aria-label="Objeto 3D facetado girando em órbita sobre um céu de estrelas" style="position:relative;width:342px;height:250px">
+<div aria-hidden="true" style="position:absolute;z-index:1;left:1px;top:71px;width:340px;height:92px;transform:rotate(-14deg)">
+<svg width="340" height="92" viewBox="0 0 340 92" fill="none" style="position:absolute;left:0;top:0"><path d="M 1 46 A 169 45 0 0 1 339 46" stroke="#915EFF" stroke-opacity=".4" stroke-width="1.2"></path></svg>
+</div>
+<svg class="float" width="210" height="195" viewBox="0 0 280 260" aria-hidden="true" style="position:absolute;z-index:2;left:66px;top:20px" stroke="#D9CCFF" stroke-opacity=".35" stroke-width="1" stroke-linejoin="round">
+<polygon points="187.6,102.5 92.4,102.5 140,185" fill="#6B3FE0"></polygon>
+<polygon points="187.6,102.5 92.4,102.5 140,20" fill="#A98BFF"></polygon>
+<polygon points="187.6,102.5 140,185 235.3,185" fill="#5B34C2"></polygon>
+<polygon points="92.4,102.5 140,185 44.7,185" fill="#7B4AE8"></polygon>
+<polygon points="187.6,102.5 140,20 235.3,75" fill="#8D63FF"></polygon>
+<polygon points="187.6,102.5 235.3,75 235.3,185" fill="#4A2A9E"></polygon>
+<polygon points="92.4,102.5 140,20 44.7,75" fill="#B79BFF"></polygon>
+<polygon points="92.4,102.5 44.7,75 44.7,185" fill="#6236D1"></polygon>
+<polygon points="140,185 44.7,185 140,240" fill="#3F2490"></polygon>
+<polygon points="140,185 140,240 235.3,185" fill="#36207F"></polygon>
+</svg>
+<div aria-hidden="true" style="position:absolute;z-index:3;left:1px;top:71px;width:340px;height:92px;transform:rotate(-14deg)">
+<svg width="340" height="92" viewBox="0 0 340 92" fill="none" style="position:absolute;left:0;top:0"><path d="M 1 46 A 169 45 0 0 0 339 46" stroke="#915EFF" stroke-opacity=".85" stroke-width="1.2"></path></svg>
+<div class="orbit-dot" style="offset-path:path('M 0 46 A 170 46 0 1 1 340 46 A 170 46 0 1 1 0 46')"></div>
+</div>
+</div>
+
+<h2 class="serif" style="margin-top:8px;text-align:center;font-size:40px;line-height:1.1;font-weight:300;letter-spacing:-0.03em">Vamos conversar?</h2>
+<p style="margin-top:12px;text-align:center;font-size:16px;line-height:1.5;color:#A39FC4">Estou procurando estágio em desenvolvimento web. Mande uma mensagem ou use os links no rodapé.</p>
+
+<div role="form" aria-label="Formulário de contato" aria-busy="true" style="margin-top:32px;background:#141030;border:1px solid #2A2350;border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="nome" style="font-size:14px;font-weight:500">Nome</label>
+<input id="nome" type="text" value="Ana Souza" disabled style="height:52px;border-radius:12px;border:1px solid #2A2350;background:#0B0E26;color:#A39FC4;padding:0 16px;font-family:inherit;font-size:16px">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="email" style="font-size:14px;font-weight:500">E-mail</label>
+<input id="email" type="email" value="ana@exemplo.com" disabled style="height:52px;border-radius:12px;border:1px solid #2A2350;background:#0B0E26;color:#A39FC4;padding:0 16px;font-family:inherit;font-size:16px">
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<label for="mensagem" style="font-size:14px;font-weight:500">Mensagem</label>
+<textarea id="mensagem" disabled style="height:120px;border-radius:12px;border:1px solid #2A2350;background:#0B0E26;color:#A39FC4;padding:14px 16px;font-family:inherit;font-size:16px;resize:none">Olá, vi seu portfólio e gostaria de conversar sobre uma vaga.</textarea>
+</div>
+<button type="button" disabled aria-busy="true" style="margin-top:6px;height:56px;border:0;border-radius:14px;background:#4B3498;color:#fff;font-family:inherit;font-size:16px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:12px;cursor:not-allowed"><span class="spin" aria-hidden="true" style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff"></span>Enviando…</button>
+</div>
+</div>
+</section>
+
+<footer style="padding:32px 24px 44px;border-top:1px solid #1F1946;font-size:14px;color:#A39FC4">
+<nav aria-label="Rodapé" style="display:flex;flex-wrap:wrap;gap:8px 24px">
+<a href="#" style="display:inline-flex;align-items:center;min-height:44px">GitHub</a>
+<a href="#" style="display:inline-flex;align-items:center;min-height:44px">LinkedIn</a>
+<a href="#" style="display:inline-flex;align-items:center;min-height:44px">Entrar</a>
+</nav>
+<p style="margin-top:12px">© 2026 Arthur Costa</p>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":4700}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
