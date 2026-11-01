@@ -14,7 +14,7 @@ const FormField = ({ id, label, error, multiline = false, ...props }) => {
         id={id}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        className={`${CONTROL} ${multiline ? "block h-30 resize-none py-3.5 md:h-35" : "h-13"}${error ? "border-erro" : "border-borda"}`}
+        className={`${CONTROL} ${multiline ? "block h-30 resize-none py-3.5 md:h-35" : "h-13"} ${error ? "border-erro" : "border-borda"}`}
         {...props}
       />
       {/* Sempre montada: o leitor de tela só anuncia mudança em região que já existe. */}

@@ -42,6 +42,7 @@ describe("ContactForm", () => {
     expect(screen.getByText(message)).toBeInTheDocument();
     expect(email).toHaveAttribute("aria-invalid", "true");
     expect(email).toHaveAccessibleDescription(message);
+    expect(email).toHaveClass("h-13", "border-erro");
 
     await user.type(email, "dominio.com");
 
