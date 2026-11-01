@@ -136,18 +136,32 @@ describe("páginas de projetos", () => {
     ).toBeInTheDocument();
   });
 
-  it("na home, o card mostra os dados do repositório", async () => {
-    stubRepos([buildRepo()]);
+  it("na home, o card grande e o pequeno mostram os dados do repositório", async () => {
+    stubRepos([
+      buildRepo(),
+      buildRepo({
+        name: "lume",
+        description: "Loja de móveis.",
+        language: "HTML",
+        updated_at: "2026-09-15T12:00:00Z",
+      }),
+    ]);
     renderRoutes(routes, "/");
 
-    const card = await screen.findByRole("article");
+    await screen.findByRole("heading", { name: "rewind-tvtime" });
+    const [large, small] = screen.getAllByRole("article");
 
-    expect(within(card).getByText("rewind-tvtime")).toBeInTheDocument();
+    expect(within(large).getByText("rewind-tvtime")).toBeInTheDocument();
     expect(
-      within(card).getByText("Guia pessoal de séries."),
+      within(large).getByText("Guia pessoal de séries."),
     ).toBeInTheDocument();
-    expect(within(card).getByText("JavaScript")).toBeInTheDocument();
-    expect(within(card).getByText(/20\/10\/2026/)).toBeInTheDocument();
+    expect(within(large).getByText("JavaScript")).toBeInTheDocument();
+    expect(within(large).getByText(/20\/10\/2026/)).toBeInTheDocument();
+
+    expect(within(small).getByText("lume")).toBeInTheDocument();
+    expect(within(small).getByText("Loja de móveis.")).toBeInTheDocument();
+    expect(within(small).getByText("HTML")).toBeInTheDocument();
+    expect(within(small).getByText(/15\/09\/2026/)).toBeInTheDocument();
   });
 
   it("na home, mostra o estado de lista vazia", async () => {
