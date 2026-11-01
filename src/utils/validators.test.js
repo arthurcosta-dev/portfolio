@@ -42,10 +42,12 @@ describe("validators", () => {
 
   it.each([
     ["", "Escreva sua mensagem."],
-    ["curta demais", "Escreva pelo menos 20 caracteres na mensagem."],
-    [`${" ".repeat(30)}curta`, "Escreva pelo menos 20 caracteres na mensagem."],
+    ["curta demais", "Escreva pelo menos 20 caracteres."],
+    [`${" ".repeat(30)}curta`, "Escreva pelo menos 20 caracteres."],
     ["a".repeat(2001), "Use até 2000 caracteres na mensagem."],
     ["a".repeat(20), ""],
+    ["😀".repeat(10), "Escreva pelo menos 20 caracteres."],
+    ["😀".repeat(20), ""],
   ])("mensagem %j", (value, expected) => {
     expect(validateMessage(value)).toBe(expected);
   });
