@@ -43,6 +43,8 @@ export const validateMessage = (value) => {
   return "";
 };
 
+export const validatePassword = (value) => (value ? "" : "Digite sua senha.");
+
 export const CONTACT_VALIDATORS = {
   name: validateName,
   email: validateEmail,
