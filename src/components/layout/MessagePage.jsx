@@ -3,7 +3,7 @@ const MessagePage = ({ title, message, children }) => (
   <div className="relative mx-auto flex min-h-[70svh] w-full max-w-[1360px] flex-col items-start justify-center gap-5 overflow-hidden px-6 py-16 md:px-10 lg:px-20">
     <div
       aria-hidden="true"
-      className="absolute top-[18%] left-[34%] aspect-[1000/260] w-[110%] -rotate-12 md:w-[70%]"
+      className="absolute top-[7%] left-[30%] aspect-[1000/260] w-[110%] -rotate-12 md:top-[12%] md:left-[52%] md:w-[70%]"
     >
       <div className="border-borda-hover size-full rounded-[50%] border-[1.2px]" />
       <div className="orbit-dot" />

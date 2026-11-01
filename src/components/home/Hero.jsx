@@ -23,8 +23,7 @@ const Hero = () => {
 
       <div className="relative z-10 md:w-[400px] md:self-end">
         <p className="text-texto-2 text-[19px] leading-[1.45] md:text-[21px]">
-          Desenvolvedor front-end em formação, procurando estágio em
-          desenvolvimento web.
+          {SITE.headline}
         </p>
         <div className="mt-6 flex flex-col gap-3 md:mt-7 md:flex-row md:items-center md:gap-7">
           <Button to="/#projetos">Ver projetos</Button>

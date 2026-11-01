@@ -68,6 +68,11 @@ export default defineConfig([
     },
   },
   {
+    // Arquivo de configuração das rotas: não é componente e não usa fast refresh.
+    files: ["src/routes.jsx"],
+    rules: { "react-refresh/only-export-components": "off" },
+  },
+  {
     files: ["**/*.mjs", "*.config.js"],
     languageOptions: { globals: globals.node },
   },

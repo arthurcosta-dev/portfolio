@@ -1,3 +1,4 @@
+import { SITE } from "../../config/site";
 import OrbitObject from "./OrbitObject";
 import StarField from "./StarField";
 
@@ -13,8 +14,7 @@ const ContactSection = () => (
         Vamos conversar?
       </h2>
       <p className="text-texto-suave mx-auto mt-3 max-w-[460px] text-center text-base leading-normal lg:mt-4 lg:text-lg">
-        Estou procurando estágio em desenvolvimento web. Mande uma mensagem ou
-        use os links no rodapé.
+        {SITE.contact.invitation}
       </p>
     </div>
   </section>

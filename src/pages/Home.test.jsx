@@ -1,20 +1,57 @@
-import { screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import { renderWithProviders } from "../test/renderWithProviders";
-import Home from "./Home";
+import { screen, waitFor, within } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { routes } from "../routes";
+import { renderRoutes } from "../test/renderWithProviders";
 
 describe("Home", () => {
-  it("mostra o nome do dono do site", () => {
-    renderWithProviders(<Home />);
-
-    expect(
-      screen.getByRole("heading", { level: 1, name: /Arthur\s*Costa/ }),
-    ).toBeInTheDocument();
+  beforeEach(() => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve([]),
+      }),
+    );
   });
 
-  it("não mostra link enquanto o contato ainda é TODO", () => {
-    renderWithProviders(<Home />);
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    document.title = "";
+  });
 
-    expect(screen.queryByText("TODO")).not.toBeInTheDocument();
+  it("mostra o nome do dono do site e devolve o título da aba", async () => {
+    document.title = "Projetos | Arthur Costa";
+    renderRoutes(routes);
+
+    expect(
+      await screen.findByRole("heading", { level: 1, name: /Arthur\s*Costa/ }),
+    ).toBeInTheDocument();
+    await waitFor(() => expect(document.title).toBe("Arthur Costa"));
+  });
+
+  it("nenhum link aponta para um valor TODO", async () => {
+    renderRoutes(routes);
+
+    await screen.findByRole("heading", { level: 1 });
+
+    screen.getAllByRole("link").forEach((link) => {
+      expect(link.getAttribute("href")).not.toMatch(/TODO/);
+    });
+  });
+
+  it("o menu leva às seções a partir de qualquer página", async () => {
+    renderRoutes(routes, "/projetos");
+
+    const menu = await screen.findByRole("navigation", { name: "Principal" });
+
+    expect(within(menu).getByRole("link", { name: "Sobre" })).toHaveAttribute(
+      "href",
+      "/#sobre",
+    );
+    expect(within(menu).getByRole("link", { name: "Contato" })).toHaveAttribute(
+      "href",
+      "/#contato",
+    );
   });
 });

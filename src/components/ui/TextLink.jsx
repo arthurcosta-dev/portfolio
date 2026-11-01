@@ -1,10 +1,22 @@
 import { Link } from "react-router";
 
 const BASE =
-  "hover:text-acento-claro inline-flex min-h-11 items-center underline decoration-1 underline-offset-4";
+  "inline-flex min-h-11 items-center underline decoration-1 underline-offset-4";
 
-const TextLink = ({ to, href, className = "", children, ...props }) => {
-  const classes = `${BASE} ${className}`;
+const TONES = {
+  default: "hover:text-acento-claro",
+  accent: "hover:text-sobre-acento-2",
+};
+
+const TextLink = ({
+  to,
+  href,
+  tone = "default",
+  className = "",
+  children,
+  ...props
+}) => {
+  const classes = `${BASE} ${TONES[tone]} ${className}`;
 
   return to ? (
     <Link to={to} className={classes} {...props}>
