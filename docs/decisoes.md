@@ -43,8 +43,9 @@ Dependências de cada funcionalidade entram na fase em que são usadas, para o h
 - **Seção que usa hook:** `FeaturedProjects` chama `useFeatured` e desenha o resultado, e nunca fala com o service. Assim a `Home` não precisa repassar props por várias camadas.
 - **Pré-visualização do GitHub (`opengraph.githubassets.com`):** testada no serviço real em 01/11/2026 (resposta 200, PNG de cerca de 120 KB, carregamento visto no navegador). Só aparece em `/projetos/:nome`, com `loading="lazy"` e tamanho reservado, e some se falhar, com teste. O formato é decidido pelo GitHub.
 
-| Exceção                                            | Razão                                                         |
-| -------------------------------------------------- | ------------------------------------------------------------- |
-| Tokens de cor em português (`bg-fundo`)            | São os nomes definidos no `DESIGN.md`.                        |
-| Tokens extras: `linha-hover`, `sobre-acento`       | Valores que o mockup usa e a tabela do `DESIGN.md` não lista. |
-| Cores dos polígonos direto no SVG do `OrbitObject` | O `DESIGN.md` pede para copiar os polígonos exatamente.       |
+| Exceção                                                     | Razão                                                           |
+| ----------------------------------------------------------- | --------------------------------------------------------------- |
+| Tokens de cor em português (`bg-fundo`)                     | São os nomes definidos no `DESIGN.md`.                          |
+| Tokens extras: `linha-hover`, `sobre-acento`                | Valores que o mockup usa e a tabela do `DESIGN.md` não lista.   |
+| Cores dos polígonos direto no SVG do `OrbitObject`          | O `DESIGN.md` pede para copiar os polígonos exatamente.         |
+| Texto branco no bloco roxo, no lugar de `#F0E9FF` do mockup | `#F0E9FF` sobre `#7B4AE8` dá 4,46:1, abaixo do mínimo de 4,5:1. |
