@@ -56,6 +56,10 @@ export default defineConfig([
               name: "@supabase/supabase-js",
               message: "O Supabase fica em src/services.",
             },
+            {
+              name: "@emailjs/browser",
+              message: "O EmailJS fica em src/services.",
+            },
           ],
           patterns: [
             {
