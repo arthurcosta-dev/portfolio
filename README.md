@@ -2,7 +2,7 @@
 
 Portfólio pessoal em React, com projetos carregados da API do GitHub, formulário de contato e dashboard do dono. Trabalho CP3 de WebDev na FIAP.
 
-**Site:** a publicar. **Vídeo:** a publicar.
+**Site:** [portfolio-ten-orcin-b9wg2d3oif.vercel.app](https://portfolio-ten-orcin-b9wg2d3oif.vercel.app/). **Vídeo:** a publicar.
 
 ## Tecnologias
 
