@@ -9,7 +9,7 @@ export const SITE = {
   about: {
     statement:
       "Estudo Engenharia de Software na FIAP e me dedico ao front-end: interface, detalhes e como a página se comporta no celular.",
-    goal: "Gosto de trabalho organizado e explicado: neste site, as decisões estão documentadas, o código tem testes e os commits seguem um padrão.",
+    goal: "Gosto de deixar o que faço organizado e explicado: neste site, as decisões estão documentadas, o código tem testes e os commits seguem um padrão.",
     technologies: [
       "React",
       "JavaScript",
@@ -23,7 +23,8 @@ export const SITE = {
       { label: "Idiomas", value: "Inglês avançado (C1), francês em estudo" },
       { label: "Foco", value: "Front-end" },
     ],
-    github: "Os repositórios públicos reúnem os projetos que construí.",
+    github:
+      "Meus projetos e estudos ficam nos repositórios públicos do GitHub.",
   },
   contact: {
     quick: "Escreva ou chame por onde preferir.",
