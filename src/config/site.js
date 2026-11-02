@@ -9,12 +9,22 @@ export const SITE = {
   about: {
     statement:
       "Estudo Engenharia de Software na FIAP e me dedico ao front-end: interface, detalhes e como a página se comporta no celular.",
-    goal: "Gosto de trabalho organizado e explicado: neste site, as decisões estão documentadas, o código tem testes e os commits seguem um padrão.",
-    technologies: ["React", "JavaScript", "Tailwind CSS", "Vite"],
-    education:
-      "1º ano de Engenharia de Software, com foco em front-end. Inglês avançado (C1) e estudando francês.",
-    objective: "Objetivo: estágio em desenvolvimento web.",
-    github: "Os repositórios públicos reúnem os projetos que construí.",
+    goal: "Gosto de deixar o que faço organizado e explicado: neste site, as decisões estão documentadas, o código tem testes e os commits seguem um padrão.",
+    technologies: [
+      "React",
+      "JavaScript",
+      "HTML e CSS",
+      "Tailwind CSS",
+      "Vite",
+      "Git",
+    ],
+    profile: [
+      { label: "Formação", value: "Engenharia de Software, FIAP (1º ano)" },
+      { label: "Idiomas", value: "Inglês avançado (C1), francês em estudo" },
+      { label: "Foco", value: "Front-end" },
+    ],
+    github:
+      "Meus projetos e estudos ficam nos repositórios públicos do GitHub.",
   },
   contact: {
     quick: "Escreva ou chame por onde preferir.",
