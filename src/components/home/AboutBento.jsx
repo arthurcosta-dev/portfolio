@@ -2,6 +2,7 @@ import { GITHUB_URL, SITE } from "../../config/site";
 import { hasValue } from "../../utils/hasValue";
 import Card from "../ui/Card";
 import TextLink from "../ui/TextLink";
+import AboutProfile from "./AboutProfile";
 import SkyIllustration from "./SkyIllustration";
 
 const AboutBento = () => (
@@ -75,22 +76,7 @@ const AboutBento = () => (
         </p>
       </Card>
 
-      <Card
-        variant="outline"
-        className="col-span-2 rounded-[22px] p-6 lg:col-span-5 lg:col-start-8 lg:row-start-2 lg:flex lg:flex-col lg:justify-between lg:rounded-3xl lg:p-8"
-      >
-        <h3 className="text-base font-medium lg:text-[17px]">
-          FIAP e objetivo
-        </h3>
-        <div>
-          <p className="text-texto-2 mt-3 text-[17px] leading-[1.45] lg:mt-0 lg:text-lg">
-            {SITE.about.education}
-          </p>
-          <p className="text-texto-suave mt-2 text-[15px] leading-normal lg:mt-2.5 lg:text-base">
-            {SITE.about.objective}
-          </p>
-        </div>
-      </Card>
+      <AboutProfile />
 
       <Card
         variant="accent"
