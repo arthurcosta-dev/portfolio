@@ -18,14 +18,14 @@ Item marcado só com evidência: arquivo, teste, URL, print ou nota do Lighthous
 - [ ] **7. Interface** (em andamento)
   - [ ] Componentes reaproveitados em todas as páginas: `src/components/ui/` na Fase 1; faltam as páginas da Fase 2.
   - [ ] Identidade própria: `docs/DESIGN.md`; telas da Fase 1 aprovadas pelo Arthur em 01/11/2026; faltam login e dashboard.
-  - [ ] Responsivo testado em todas as telas: sem corte horizontal de 360 a 1920 px na Fase 1 (`docs/evidencias/verificacoes-producao.md`); faltam as telas da Fase 2 e o teste no celular.
-- [ ] **8. Performance** (em andamento)
-  - [ ] Lighthouse mobile >= 80 em produção: na Fase 1, a home deu 89, 98 e 94, `/projetos` deu 95 e `/projetos/portfolio` deu 94, em 01/11/2026; `docs/evidencias/verificacoes-producao.md` e prints da home em `docs/evidencias/`. Repetir no fim.
-  - [ ] Sem saltos: na Fase 1, CLS de 0,001 na home, 0,018 em `/projetos` e 0,016 em `/projetos/portfolio` (mesmo arquivo). Repetir no fim.
+  - [ ] Responsivo testado em todas as telas: sem corte horizontal de 360 a 1920 px em todas as rotas, login e painel incluídos, em 02/11/2026 (`docs/evidencias/verificacoes-producao.md`, seção Fase 3); falta o teste no celular real.
+- [x] **8. Performance**
+  - [x] Lighthouse mobile >= 80 em produção: em 02/11/2026, performance de 92 a 99 em home, `/projetos`, detalhe, login e 404, e 100 em acessibilidade, boas práticas e SEO; `docs/evidencias/verificacoes-producao.md` (seção Fase 3) e `docs/evidencias/lighthouse-fase-3-*.png`. Repetir depois da Fase 4.
+  - [x] Sem saltos: em 02/11/2026, CLS de 0,001 na home, 0,006 em `/projetos` e 0 no detalhe, login e 404; home com 0, 1 e 2 destaques entre 0,002 e 0,004 (mesmo arquivo). Correção do rodapé no PR #17. Repetir depois da Fase 4.
   - [x] Sem requisição repetida: `src/pages/Projects.test.jsx`.
   - [x] Imagens carregadas só quando aparecem: `loading="lazy"` em `src/pages/Projects.test.jsx`.
-  - [ ] Imagens otimizadas em formato e tamanho. Falta uma imagem própria em WebP ou AVIF.
-  - [ ] Dashboard e elementos pesados sob demanda, na Fase 2.
+  - [x] Imagens otimizadas em formato e tamanho: ilustração do Sobre em WebP, 600w e 1200w com `srcset`, `width` e `height`; `src/pages/Home.test.jsx`.
+  - [x] Dashboard e elementos pesados sob demanda: `React.lazy` em `src/routes.jsx`; Supabase e EmailJS por `import()` em `src/services/`; blocos separados em `docs/evidencias/analyze-fase-3.png`.
 - [ ] **9. Testes:** validação do formulário e bloqueio do dashboard.
 - [x] **10. Deploy:** https://portfolio-ten-orcin-b9wg2d3oif.vercel.app/ ; status da Vercel nos merges e `/robots.txt` publicado pelo PR #5: `docs/evidencias/verificacoes-producao.md`.
 - [ ] **11. Versionamento** (em andamento)
