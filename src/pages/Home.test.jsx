@@ -30,6 +30,20 @@ describe("Home", () => {
     await waitFor(() => expect(document.title).toBe("Arthur Costa"));
   });
 
+  it("a ilustração do Sobre é WebP, com tamanho reservado e carregamento tardio", async () => {
+    renderRoutes(routes);
+
+    const image = await screen.findByRole("img", {
+      name: /céu noturno com uma órbita/,
+    });
+
+    expect(image.getAttribute("src")).toMatch(/\.webp$/);
+    expect(image.getAttribute("srcset")).toMatch(/600w.*1200w/);
+    expect(image).toHaveAttribute("loading", "lazy");
+    expect(image).toHaveAttribute("width", "1200");
+    expect(image).toHaveAttribute("height", "400");
+  });
+
   it("nenhum link aponta para um valor TODO", async () => {
     renderRoutes(routes);
 

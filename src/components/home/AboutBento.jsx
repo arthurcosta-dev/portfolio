@@ -2,6 +2,7 @@ import { GITHUB_URL, SITE } from "../../config/site";
 import { hasValue } from "../../utils/hasValue";
 import Card from "../ui/Card";
 import TextLink from "../ui/TextLink";
+import SkyIllustration from "./SkyIllustration";
 
 const AboutBento = () => (
   <section
@@ -13,13 +14,16 @@ const AboutBento = () => (
     </h2>
 
     <div className="mt-8 grid grid-cols-2 gap-3 lg:mt-12 lg:grid-cols-12 lg:grid-rows-[minmax(224px,auto)_minmax(224px,auto)_minmax(208px,auto)] lg:gap-4">
-      <Card className="rounded-card-lg col-span-2 p-7 lg:col-span-7 lg:row-span-2 lg:rounded-card-xl lg:p-11">
+      <Card className="rounded-card-lg col-span-2 p-7 lg:col-span-7 lg:row-span-2 lg:flex lg:flex-col lg:rounded-card-xl lg:p-11">
         <p className="font-serif text-[27px] leading-[1.22] font-light tracking-[-0.02em] lg:max-w-[600px] lg:text-[clamp(2rem,2.95vw,2.5rem)] lg:leading-[1.18]">
           {SITE.about.statement}
         </p>
         <p className="text-texto-suave mt-4 text-base leading-normal lg:mt-6 lg:max-w-[520px] lg:text-lg">
           {SITE.about.goal}
         </p>
+        <div className="mt-6 lg:mt-auto lg:pt-8">
+          <SkyIllustration className="rounded-card-md" />
+        </div>
       </Card>
 
       <Card
