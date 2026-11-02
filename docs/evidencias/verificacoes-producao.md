@@ -84,7 +84,7 @@ Home no celular (390 px), rolada até o fim, com a lista de destaques simulada.
 
 ### Lighthouse mobile
 
-Notas dos relatórios JSON. Prints: `lighthouse-fase-3-home.png` e `lighthouse-fase-3-detalhe.png`.
+Notas dos relatórios JSON, com um print por rota em `docs/evidencias/lighthouse-fase-3-*.png` (home, detalhe, projetos, login e 404). O painel não entra: o Lighthouse abre `/admin` sem login, e a rota redireciona para `/login`, que já está na tabela. O painel logado foi conferido só no corte horizontal acima.
 
 | Rota                  | Performance | Acessibilidade | Boas práticas | SEO | LCP   | TBT   | CLS   |
 | --------------------- | ----------- | -------------- | ------------- | --- | ----- | ----- | ----- |
@@ -92,11 +92,10 @@ Notas dos relatórios JSON. Prints: `lighthouse-fase-3-home.png` e `lighthouse-f
 | `/projetos`           | 95          | 100            | 100           | 100 | 2.7 s | 10 ms | 0.006 |
 | `/projetos/portfolio` | 92          | 100            | 100           | 100 | 3.2 s | 30 ms | 0     |
 | `/login`              | 97          | 100            | 100           | 100 | 2.3 s | 30 ms | 0     |
-| `/admin`              | 97          | 100            | 100           | 100 | 2.3 s | 10 ms | 0     |
 | `/nao-existe`         | 98          | 100            | 100           | 100 | 2.0 s | 0 ms  | 0     |
 
 Antes do PR #17, `/projetos/portfolio` tinha CLS de 0,055: o rodapé aparecia na tela durante o carregamento e era empurrado para baixo.
 
 ### Bundle (`npm run analyze`)
 
-Mapa em `analyze-fase-3.png`. A home baixa só `index` (84,7 kB gzip) e o bloco compartilhado de React Router e TanStack Query (37,7 kB gzip). Supabase (55,2 kB gzip) e EmailJS (1,5 kB gzip) só baixam quando o formulário é enviado ou o login abre. Login (1,3 kB), painel (2,6 kB) e detalhe (1,1 kB) são blocos separados. A ilustração do Sobre tem 5 kB (600w) e 9,8 kB (1200w) em WebP.
+Mapa em `analyze-fase-3.png`. A home baixa só `index` (84,7 kB gzip) e o bloco compartilhado de React Router e TanStack Query (37,7 kB gzip). Supabase (55,2 kB gzip) e EmailJS (1,5 kB gzip) só baixam quando o formulário é enviado ou o login abre. Login (1,3 kB), painel (2,6 kB) e detalhe (1,1 kB) são blocos separados. O mapa mostra o React Router vindo de `dist/development`: na versão 7.18.5, essa é a única pasta que o pacote exporta, tem o mesmo tamanho e o mesmo código da pasta `production`, e os trechos só de desenvolvimento são removidos pelo Vite no build. A ilustração do Sobre tem 5 kB (600w) e 9,8 kB (1200w) em WebP.
