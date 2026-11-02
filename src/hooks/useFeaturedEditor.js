@@ -35,7 +35,8 @@ const useFeaturedEditor = () => {
     selected,
     isPending: repos.isPending || saved.isPending,
     reposError: repos.error,
-    hasFeaturedFailed: saved.isError,
+    // Só sem dado nenhum: uma releitura que falha depois não apaga a lista da tela.
+    hasFeaturedFailed: saved.isLoadingError,
     // Só refaz o que falhou: chamar o GitHub à toa gasta o limite de 60 por hora.
     retryRepos: repos.refetch,
     retryFeatured: saved.refetch,

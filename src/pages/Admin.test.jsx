@@ -265,6 +265,49 @@ describe("login e painel", () => {
     expect(fetch.mock.calls.length).toBe(gitHubCalls);
   });
 
+  it("se salvar e reler falharem, a lista continua e o aviso aparece", async () => {
+    startSession({ user: { id: "dono" } });
+    saveFeaturedNames.mockRejectedValue(new Error("sem rede"));
+    const user = userEvent.setup();
+    renderRoutes(routes, "/admin");
+
+    await user.click(
+      await screen.findByRole("switch", { name: "Destacar alfa" }),
+    );
+    fetchFeaturedNames.mockRejectedValue(new Error("sem rede"));
+    await user.click(screen.getByRole("button", { name: "Salvar destaques" }));
+
+    expect(
+      await screen.findByText(/Os destaques não foram salvos/),
+    ).toBeInTheDocument();
+    await waitFor(() => expect(fetchFeaturedNames.mock.calls.length).toBe(2));
+    expect(screen.getByRole("switch", { name: "Destacar alfa" })).toBeChecked();
+    expect(screen.queryByText("Os destaques não carregaram")).toBeNull();
+  });
+
+  it("sair da tela durante a falha não deixa novas tentativas rodando", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    let fail;
+    onAuthChange.mockImplementation(
+      () =>
+        new Promise((_, reject) => {
+          fail = reject;
+        }),
+    );
+    const { router } = renderRoutes(routes, "/login");
+    await screen.findByRole("status", { name: "Conferindo o login" });
+    const callsBefore = onAuthChange.mock.calls.length;
+
+    await act(() => router.navigate("/projetos"));
+    await act(async () => {
+      fail(new Error("rede"));
+      await vi.advanceTimersByTimeAsync(10000);
+    });
+
+    expect(onAuthChange.mock.calls.length).toBe(callsBefore);
+    vi.useRealTimers();
+  });
+
   it("destaques sem projetos mostram o estado vazio", async () => {
     startSession({ user: { id: "dono" } });
     stubRepos([]);

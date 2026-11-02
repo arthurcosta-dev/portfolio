@@ -25,6 +25,9 @@ const useAuthSession = () => {
           }
         })
         .catch(() => {
+          if (!isActive) {
+            return;
+          }
           // Sem conseguir conferir, mostra o login e segue tentando: sem isso,
           // um login feito depois que a rede voltar não seria percebido.
           setSession((current) => current ?? null);

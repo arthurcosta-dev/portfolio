@@ -20,7 +20,7 @@ const useMessages = () => {
   return {
     messages: query.data ?? [],
     isPending: query.isPending,
-    isError: query.isError,
+    isError: query.isLoadingError,
     refetch: query.refetch,
     setAnswered: mutation.mutate,
     updatingId: mutation.isPending ? mutation.variables.id : null,
