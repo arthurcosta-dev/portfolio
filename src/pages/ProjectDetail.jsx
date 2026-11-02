@@ -44,7 +44,7 @@ const ProjectDetail = () => {
   usePageTitle(repo?.name ?? nome);
 
   return (
-    <div className="mx-auto max-w-[960px] px-6 pt-4 pb-[72px] md:px-10 lg:pb-24">
+    <div className="mx-auto min-h-svh max-w-[960px] px-6 pt-4 pb-[72px] md:px-10 lg:pb-24">
       <p className="mb-4 text-[15px]">
         <TextLink to="/projetos">Todos os projetos</TextLink>
       </p>

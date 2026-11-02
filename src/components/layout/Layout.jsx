@@ -8,7 +8,7 @@ const PageFallback = () => (
   <div
     role="status"
     aria-label="Carregando página"
-    className="text-acento-claro flex min-h-[60svh] items-center justify-center"
+    className="text-acento-claro flex min-h-svh items-center justify-center"
   >
     <Spinner />
   </div>
