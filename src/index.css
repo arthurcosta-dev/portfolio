@@ -113,6 +113,28 @@
   }
 }
 
+/* A órbita começa na ponta esquerda e passa por trás do objeto na primeira metade da volta.
+   Por isso a camada do ponto troca no meio, com a mesma duração da animação orbit. */
+@keyframes orbit-layer {
+  0%,
+  49.9% {
+    z-index: 0;
+  }
+  50%,
+  100% {
+    z-index: 2;
+  }
+}
+
+@utility orbit-layer {
+  z-index: 2;
+  animation: orbit-layer 28s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 @utility float {
   animation: float 9s ease-in-out infinite;
 

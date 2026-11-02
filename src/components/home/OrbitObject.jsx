@@ -23,7 +23,7 @@ const OrbitObject = () => (
     <svg
       viewBox="0 0 460 340"
       fill="none"
-      className="absolute inset-0 size-full"
+      className="absolute inset-0 z-1 size-full"
     >
       <path
         transform={ORBIT_TRANSFORM}
@@ -52,7 +52,7 @@ const OrbitObject = () => (
         className="stroke-acento-vivo"
       />
     </svg>
-    <div className="absolute top-[35.3%] left-0 h-[35.3%] w-full -rotate-16">
+    <div className="orbit-layer absolute top-[35.3%] left-0 h-[35.3%] w-full -rotate-16">
       <div className="orbit-dot" />
     </div>
   </div>
