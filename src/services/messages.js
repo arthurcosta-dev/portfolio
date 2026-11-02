@@ -11,6 +11,32 @@ const insertMessage = async (message) => {
   }
 };
 
+export const fetchMessages = async () => {
+  const supabase = await getSupabase();
+  const { data, error } = await supabase
+    .from("messages")
+    .select("id, name, email, message, answered, created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+export const setMessageAnswered = async ({ id, answered }) => {
+  const supabase = await getSupabase();
+  const { error } = await supabase
+    .from("messages")
+    .update({ answered })
+    .eq("id", id);
+
+  if (error) {
+    throw error;
+  }
+};
+
 // A mensagem salva já aparece no dashboard; o e-mail é só um aviso a mais.
 export const sendContactMessage = async ({ name, email, message }) => {
   const contact = {

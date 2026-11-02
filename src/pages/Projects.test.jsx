@@ -71,7 +71,7 @@ describe("páginas de projetos", () => {
 
   it("não repete a requisição ao navegar entre as páginas", async () => {
     const fetchMock = stubRepos([buildRepo()]);
-    const router = renderRoutes(routes, "/");
+    const { router } = renderRoutes(routes, "/");
 
     await screen.findByRole("heading", { name: "rewind-tvtime" });
     await router.navigate("/projetos");

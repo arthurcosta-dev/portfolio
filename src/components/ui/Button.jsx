@@ -6,7 +6,8 @@ const BASE =
 const VARIANTS = {
   primary:
     "bg-acento text-sobre-acento hover:bg-acento-hover disabled:bg-desabilitado",
-  outline: "border border-borda-forte text-texto hover:border-borda-hover",
+  outline:
+    "border border-borda-forte text-texto hover:border-borda-hover disabled:text-texto-suave disabled:hover:border-borda-forte",
 };
 
 const Button = ({

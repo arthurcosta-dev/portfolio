@@ -4,6 +4,7 @@ import {
   validateEmail,
   validateMessage,
   validateName,
+  validatePassword,
 } from "./validators";
 
 const VALID = {
@@ -35,6 +36,7 @@ describe("validators", () => {
       `${"a".repeat(250)}@b.co`,
       "Digite um e-mail válido, como nome@dominio.com.",
     ],
+    ["ana@b.co?bcc=x", "Digite um e-mail válido, como nome@dominio.com."],
     [" ana@dominio.com ", ""],
   ])("e-mail %j", (value, expected) => {
     expect(validateEmail(value)).toBe(expected);
@@ -50,6 +52,11 @@ describe("validators", () => {
     ["😀".repeat(20), ""],
   ])("mensagem %j", (value, expected) => {
     expect(validateMessage(value)).toBe(expected);
+  });
+
+  it("senha é obrigatória", () => {
+    expect(validatePassword("")).toBe("Digite sua senha.");
+    expect(validatePassword(" a ")).toBe("");
   });
 
   it("formulário válido não tem erros", () => {

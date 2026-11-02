@@ -1,25 +1,31 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render } from "@testing-library/react";
+import { StrictMode } from "react";
 import { createMemoryRouter, RouterProvider } from "react-router";
-import { QUERY_DEFAULTS } from "../queryClient";
+import { MUTATION_DEFAULTS, QUERY_DEFAULTS } from "../queryClient";
 import ThemeProvider from "../context/ThemeProvider";
 
 export const renderRoutes = (routes, initialEntry = "/") => {
   const router = createMemoryRouter(routes, { initialEntries: [initialEntry] });
   // Mesmo cache do site; só sem repetição, para o teste de erro não esperar.
   const queryClient = new QueryClient({
-    defaultOptions: { queries: { ...QUERY_DEFAULTS, retry: false } },
+    defaultOptions: {
+      queries: { ...QUERY_DEFAULTS, retry: false },
+      mutations: MUTATION_DEFAULTS,
+    },
   });
 
   render(
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </QueryClientProvider>,
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </StrictMode>,
   );
 
-  return router;
+  return { router, queryClient };
 };
 
 export const renderWithProviders = (element) =>
