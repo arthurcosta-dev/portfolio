@@ -7,7 +7,7 @@ import AuthChecking from "./AuthChecking";
 // O carregamento tem a altura do login, para o rodapé não saltar quando a página chega.
 const AuthLayout = () => (
   <AuthProvider>
-    <Suspense fallback={<AuthChecking />}>
+    <Suspense fallback={<AuthChecking label="Carregando página" />}>
       <Outlet />
     </Suspense>
   </AuthProvider>
