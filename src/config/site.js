@@ -8,7 +8,7 @@ export const SITE = {
     "Desenvolvedor front-end em formação, procurando estágio em desenvolvimento web.",
   about: {
     statement:
-      "Estudo Engenharia de Software na FIAP e me dedico ao front-end: interface, detalhes e como a página se comporta no celular.",
+      "Estudo Engenharia de Software na FIAP e estou me dedicando ao front-end: interface, detalhes e como a página se comporta no celular.",
     goal: "Gosto de deixar o que faço organizado e explicado: neste site, as decisões estão documentadas, o código tem testes e os commits seguem um padrão.",
     technologies: [
       "React",
