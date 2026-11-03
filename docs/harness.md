@@ -66,7 +66,7 @@ O conjunto que faz a IA seguir os padrões do projeto. Para cada item: o que é,
 - **Regra que faz cumprir:** GitHub Flow, lint, teste e build antes do PR, reaproveitamento de `ui/`.
 - **Exemplos reais:**
   - A `nova-feature` foi usada na Fase 1. Nos projetos do GitHub (PR #4), a ordem foi service, hook e componente, com testes de carregamento, erro e vazio junto do código.
-  - Na Fase 2, o formulário (PR #9) e o painel (PR #10) seguiram a mesma ordem: `messages.js`, `useContactForm` e `ContactForm`; `auth.js`, `useAuth` e `ProtectedRoute`.
+  - Na Fase 2, o formulário (PR #9) e o painel (PR #10) seguiram a mesma separação: `messages.js`, `useContactForm` e `ContactForm`; `auth.js`, `useAuth` e `ProtectedRoute`.
 
 ## Skill `frontend-design`
 

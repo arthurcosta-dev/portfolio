@@ -8,12 +8,12 @@ src/
   routes.jsx      todas as rotas, com lazy onde indicado
   config/site.js  dados pessoais e textos fixos
   components/
-    ui/           Button, Card, FormField, Tag, Skeleton, Spinner, ErrorState, EmptyState
-    layout/       Header, Footer, Layout
+    ui/           Button, Card, FormField, Switch, Tag, TextLink, ThemeToggle, Skeleton, Spinner, ErrorState, EmptyState
+    layout/       Header, Footer, Layout, MessagePage
     home/         seções da página inicial
     projects/     ProjectCard, ProjectRow e skeletons
     contact/      ContactForm
-    admin/        AuthLayout, ProtectedRoute, LoginForm, MessageList, FeaturedSelector
+    admin/        AuthLayout, AuthChecking, ProtectedRoute, LoginForm, MessageList, MessageRow, FeaturedSelector, FeaturedRow
   pages/          uma por rota
   hooks/          estado e ciclo de vida
   services/       conversa com GitHub, Supabase e EmailJS

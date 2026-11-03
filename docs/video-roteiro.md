@@ -49,15 +49,15 @@ Entrevista simulada para uma vaga de front-end: até 8 minutos, rosto e tela vis
 
 **Na tela:** a tabela de `docs/decisoes.md`. Para cada item: o que foi comparado, o critério e o que você aceitou perder.
 
-| Escolha                  | Comparei com               | Critério                                              | O que perdi                                                                       |
-| ------------------------ | -------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------- |
-| React Router 7           | TanStack Router, wouter    | Visto em aula; tem rota 404, erro de rota e lazy      | Menos tipagem                                                                     |
-| TanStack Query           | axios, SWR, `useEffect`    | Cache e estados prontos, sem pedir de novo ao GitHub  | Uma biblioteca a mais para aprender                                               |
-| Tailwind com tokens      | CSS Modules, MUI           | Rápido para o bento; só cores do tema compilam        | HTML mais longo                                                                   |
-| Supabase                 | Firebase, back-end em Node | SQL e permissões no próprio banco (RLS), sem servidor | Depende de serviço externo; o plano grátis pausa, e um workflow diário evita isso |
-| EmailJS                  | Formspree, back-end        | Sem servidor, plano grátis                            | A chave fica pública, e restringir o domínio é pago                               |
-| Vercel                   | Netlify, GitHub Actions    | Publica sozinho a cada merge                          | Preso à plataforma                                                                |
-| Vitest + Testing Library | Playwright                 | Integra com o Vite e é rápido                         | Sem teste ponta a ponta em navegador real                                         |
+| Escolha                  | Comparei com               | Critério                                                                               | O que perdi                                                                       |
+| ------------------------ | -------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| React Router 7           | TanStack Router, wouter    | Visto em aula; tem rota 404, erro de rota e lazy                                       | Menos tipagem                                                                     |
+| TanStack Query           | axios, SWR, `useEffect`    | Cache e estados prontos, sem pedir de novo ao GitHub                                   | Uma biblioteca a mais para aprender                                               |
+| Tailwind com tokens      | CSS Modules, MUI           | Rápido para o bento; as cores padrão foram removidas, e hex solto é barrado na revisão | HTML mais longo                                                                   |
+| Supabase                 | Firebase, back-end em Node | SQL e permissões no próprio banco (RLS), sem servidor                                  | Depende de serviço externo; o plano grátis pausa, e um workflow diário evita isso |
+| EmailJS                  | Formspree, back-end        | Sem servidor, plano grátis                                                             | A chave fica pública, e restringir o domínio é pago                               |
+| Vercel                   | Netlify, GitHub Actions    | Publica sozinho a cada merge                                                           | Preso à plataforma                                                                |
+| Vitest + Testing Library | Playwright                 | Integra com o Vite e é rápido                                                          | Sem teste ponta a ponta em navegador real                                         |
 
 Fale também de uma decisão de performance. A home lê os destaques do Supabase com `fetch` puro, sem a biblioteca, para o visitante não baixar 55 kB a mais. O Lighthouse mobile ficou entre 92 e 99.
 
@@ -89,5 +89,5 @@ Fale também de uma decisão de performance. A home lê os destaques do Supabase
 
 ## 7:30 a 8:00: fechamento
 
-- Resultado: 12 requisitos cumpridos, 161 testes, Lighthouse mobile acima de 90 e deploy automático.
+- Resultado: 12 requisitos cumpridos, 162 testes, Lighthouse mobile acima de 90 e deploy automático.
 - O que você aprendeu ou faria diferente. Fale com as suas palavras; não está escrito aqui de propósito.

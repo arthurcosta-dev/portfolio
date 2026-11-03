@@ -1,6 +1,6 @@
 # Verificações em produção
 
-Geradas por script em navegador real (Edge, Playwright) em 2026-11-01, em https://portfolio-ten-orcin-b9wg2d3oif.vercel.app.
+Fases 1 e 3: geradas por script em navegador real (Edge, Playwright), em https://portfolio-ten-orcin-b9wg2d3oif.vercel.app. Fases 2 e 4: verificações manuais do Arthur e pedidos feitos direto às APIs, como cada seção descreve.
 
 ## Deploy automático
 
@@ -127,4 +127,4 @@ O workflow `supabase-ativo.yml` rodou à mão e o Supabase respondeu 200: https:
 
 ### Celular
 
-O Arthur abriu o site publicado no celular dele e conferiu as telas.
+O Arthur abriu o site publicado no celular dele e confirmou, em 03/11/2026, que as telas estavam certas.
