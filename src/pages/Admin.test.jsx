@@ -353,6 +353,20 @@ describe("login e painel", () => {
     );
   });
 
+  it("mostra o carregamento das mensagens e dos destaques", async () => {
+    startSession({ user: { id: "dono" } });
+    fetchMessages.mockReturnValue(new Promise(() => {}));
+    fetchFeaturedNames.mockReturnValue(new Promise(() => {}));
+    renderRoutes(routes, "/admin");
+
+    expect(
+      await screen.findByRole("status", { name: "Carregando mensagens" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("status", { name: "Carregando projetos" }),
+    ).toBeInTheDocument();
+  });
+
   it("mostra erro e lista vazia nas mensagens", async () => {
     startSession({ user: { id: "dono" } });
     fetchMessages.mockRejectedValueOnce(new Error("falhou"));
