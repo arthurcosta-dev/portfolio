@@ -24,16 +24,17 @@
 
 ## Mudanças em relação ao BRIEF
 
-| Decisão                                                                     | Razão                                                                                                                                   |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Tailwind 4: tokens em `@theme` no `src/index.css`, sem `tailwind.config.js` | É o formato da versão atual. `--color-*: initial` tira as cores padrão (`bg-red-500`); `bg-[#fff]` ainda compila e fica para o revisor. |
-| React Router fica na 7, embora a 8 já exista                                | É o que o BRIEF decidiu e o que foi visto em aula. A 8 não traz nada de que o projeto precise, e o prazo é curto.                       |
-| ESLint configurado à mão                                                    | O template atual do Vite traz oxlint, e o BRIEF decidiu ESLint.                                                                         |
-| Hooks e `deny` cobrem Bash e PowerShell                                     | O BRIEF cita só Bash, mas o Claude Code usa os dois neste Windows.                                                                      |
-| `deny` lista cada `.env` real em vez de `.env*`                             | `.env*` bloquearia também o `.env.example`.                                                                                             |
-| `git push` no `allow`                                                       | Não está na lista do BRIEF, mas o fluxo de PR precisa. O force segue vetado.                                                            |
-| Commits com e-mail noreply do GitHub                                        | Decisão do Arthur, para o e-mail pessoal não ficar público no histórico.                                                                |
-| Branches `test/*` e `perf/*` aceitas                                        | Constam na seção 10 do BRIEF, embora não na seção 4.                                                                                    |
+| Decisão                                                                     | Razão                                                                                                                                               |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tailwind 4: tokens em `@theme` no `src/index.css`, sem `tailwind.config.js` | É o formato da versão atual. `--color-*: initial` tira as cores padrão (`bg-red-500`); `bg-[#fff]` ainda compila e fica para o revisor.             |
+| React Router fica na 7, embora a 8 já exista                                | É o que o BRIEF decidiu e o que foi visto em aula. A 8 não traz nada de que o projeto precise, e o prazo é curto.                                   |
+| ESLint configurado à mão                                                    | O template atual do Vite traz oxlint, e o BRIEF decidiu ESLint.                                                                                     |
+| Hooks e `deny` cobrem Bash e PowerShell                                     | O BRIEF cita só Bash, mas o Claude Code usa os dois neste Windows.                                                                                  |
+| `deny` lista cada `.env` real em vez de `.env*`                             | `.env*` bloquearia também o `.env.example`.                                                                                                         |
+| `git push` no `allow`                                                       | Não está na lista do BRIEF, mas o fluxo de PR precisa. O force segue vetado.                                                                        |
+| Commits com e-mail noreply do GitHub                                        | Decisão do Arthur, para o e-mail pessoal não ficar público no histórico.                                                                            |
+| Branches `test/*` e `perf/*` aceitas                                        | Constam na seção 10 do BRIEF, embora não na seção 4.                                                                                                |
+| Workflow diário `supabase-ativo.yml`                                        | Fora do BRIEF, aprovado pelo Arthur em 03/11/2026: sem ele, o Supabase grátis pausa em cerca de uma semana e o formulário para durante a avaliação. |
 
 Dependências de cada funcionalidade entram na fase em que são usadas, para o histórico mostrar quando cada uma chegou: `react-router@7` e TanStack Query na Fase 1; Supabase e EmailJS na Fase 2. A versão 7 do Router é instalada explicitamente, para não vir a 8.
 
