@@ -8,12 +8,12 @@ src/
   routes.jsx      todas as rotas, com lazy onde indicado
   config/site.js  dados pessoais e textos fixos
   components/
-    ui/           Button, Card, FormField, Tag, Skeleton, Spinner, ErrorState, EmptyState
-    layout/       Header, Footer, Layout
+    ui/           Button, Card, FormField, Switch, Tag, TextLink, ThemeToggle, Skeleton, Spinner, ErrorState, EmptyState
+    layout/       Header, Footer, Layout, MessagePage
     home/         seções da página inicial
     projects/     ProjectCard, ProjectRow e skeletons
     contact/      ContactForm
-    admin/        MessageList, FeaturedSelector
+    admin/        AuthLayout, AuthChecking, ProtectedRoute, LoginForm, MessageList, MessageRow, FeaturedSelector, FeaturedRow
   pages/          uma por rota
   hooks/          estado e ciclo de vida
   services/       conversa com GitHub, Supabase e EmailJS
@@ -23,7 +23,8 @@ src/
 .claude/          harness de IA (ver docs/harness.md)
 .husky/           verificações antes do commit
 docs/             requisitos, design e documentos do vídeo
-supabase/         SQL das tabelas e permissões (chega na Fase 2)
+supabase/         SQL das tabelas, permissões (grants) e políticas (RLS)
+.github/workflows/ ci.yml (lint, testes e build) e supabase-ativo.yml (leitura diária)
 ```
 
 ## Fluxo de dados
@@ -38,7 +39,13 @@ flowchart LR
   H -->|dados, carregando, erro| P
 ```
 
-O componente só desenha o que recebe. Exemplo planejado: `ProjectCard` recebe um repositório; `useRepos` cuida de cache e estados; `github.js` faz o `fetch`.
+O componente só desenha o que recebe. Três exemplos reais:
+
+- **Projetos:** `github.js` faz o `fetch`; `useRepos` guarda em cache com o TanStack Query e devolve carregando, erro e dados; `ProjectCard` desenha um repositório.
+- **Contato:** `ContactForm` desenha os campos; `useContactForm` valida com `utils/validators.js` e envia com `useMutation`; `messages.js` grava no Supabase e chama `email.js`, que manda o EmailJS.
+- **Painel:** `ProtectedRoute` lê a sessão do `AuthContext` e redireciona sem login; `useMessages` e `useFeaturedEditor` chamam `messages.js` e `featured.js`; `MessageList` e `FeaturedSelector` usam esses hooks e desenham as linhas com `MessageRow` e `FeaturedRow`, sem falar com os services.
+
+Supabase e EmailJS entram por `import()` dentro dos services, então só baixam quando alguém envia o formulário ou abre o login.
 
 ## Critério para dividir componentes
 
