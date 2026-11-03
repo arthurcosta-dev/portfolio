@@ -78,6 +78,10 @@ Cada conceito em linguagem simples, com o exemplo deste projeto.
 
 **CI (GitHub Actions):** a cada PR, um computador do GitHub baixa o projeto e roda lint, testes e build (`.github/workflows/ci.yml`). Se algo falhar, o PR fica vermelho. Isso pega o que funciona só na minha máquina.
 
+**Workflow agendado (`schedule`):** um workflow do GitHub Actions também pode rodar em horário marcado, escrito em formato cron (`17 9 * * *` = todo dia às 9h17, horário UTC). O `supabase-ativo.yml` faz uma leitura por dia na tabela pública de destaques. Isso conta como uso e impede o plano grátis do Supabase de pausar o projeto enquanto o portfólio é avaliado. O `workflow_dispatch` permite rodar o workflow na mão pela aba Actions.
+
+**Secrets do GitHub:** valores guardados nas configurações do repositório (Settings → Secrets and variables → Actions). O workflow lê esses valores, mas eles não aparecem no código nem nos logs. A chave usada aqui é a mesma chave pública do site. Ela fica em secret só para o endereço do projeto não ficar escrito no repositório.
+
 **Proteção de branch:** regra configurada no próprio GitHub, que impede push direto na `main`, mesmo meu. Só entra código por PR, e com o CI verde.
 
 **Pull request (PR):** pedido para juntar uma branch à `main`. Mostra as mudanças, roda o CI e, na Vercel, gera um site de pré-visualização antes de publicar de verdade.
