@@ -23,7 +23,7 @@ jobs:
             echo "Faltam os secrets SUPABASE_URL e SUPABASE_PUBLISHABLE_KEY no repositório."
             exit 1
           fi
-          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
+          status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 30 \
             -H "apikey: $SUPABASE_PUBLISHABLE_KEY" \
             "$SUPABASE_URL/rest/v1/featured_projects?select=repo_name&limit=1")
           echo "Resposta do Supabase: $status"
